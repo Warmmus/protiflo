@@ -1,0 +1,5081 @@
+/* =========================================================
+   PROTIFLO — APP STYLES
+   Navbar • Watcher • Cave light • Hero • Corrupted About
+   Global color variables are defined in styles.css.
+   ========================================================= */
+
+/* =========================
+   1. PORTFOLIO / CAVE
+   ========================= */
+
+.portfolio {
+  --nav-height: 90px;
+  --beam-origin: 74px;
+
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.015), transparent 35%),
+    #010101;
+}
+
+.cave-lighting {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+/* Angular toggles .active after the Hero leaves the viewport. */
+.cave-lighting.active {
+  opacity: 1;
+}
+
+
+/* =========================
+   CAVE DARKNESS / LIGHT REVEAL
+   ========================= */
+
+.cave-lighting::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: rgba(
+    0, 0, 0,
+    var(--cave-darkness)
+  );
+
+  pointer-events: none;
+
+  /*
+   * Create an opening in the darkness
+   * where the Watcher's beam is aimed.
+   */
+
+  -webkit-mask-image: conic-gradient(
+    from var(--beam-angle, 0deg)
+    at 50% var(--beam-origin),
+
+    black 0deg 140deg,
+    rgba(0, 0, 0, 0.45) 147deg,
+    transparent 155deg 205deg,
+    rgba(0, 0, 0, 0.45) 213deg,
+    black 220deg 360deg
+  );
+
+  mask-image: conic-gradient(
+    from var(--beam-angle, 0deg)
+    at 50% var(--beam-origin),
+
+    black 0deg 140deg,
+    rgba(0, 0, 0, 0.45) 147deg,
+    transparent 155deg 205deg,
+    rgba(0, 0, 0, 0.45) 213deg,
+    black 220deg 360deg
+  );
+}
+
+
+/* Keep this transform free of animations: Angular controls --beam-angle. */
+.light-beam {
+  position: absolute;
+
+  top: var(--uav-beam-origin);
+  left: 50%;
+
+  width: min(78vw, 720px);
+  height: calc(100vh - var(--uav-beam-origin));
+
+  transform: translateX(-50%) rotate(var(--beam-angle, 0deg));
+  transform-origin: top center;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(230, 194, 41, 0.34) 0%,
+      rgba(230, 194, 41, 0.18) 28%,
+      rgba(230, 194, 41, 0.08) 62%,
+      transparent 100%
+    );
+
+  /* The mouse rotates this filtered layer. */
+  will-change: transform;
+
+  clip-path: polygon(
+    49.3% 0%,
+    50.7% 0%,
+    54% 10%,
+    60% 24%,
+    70% 48%,
+    100% 100%,
+    0% 100%,
+    30% 48%,
+    40% 24%,
+    46% 10%
+  );
+
+  filter: blur(4px);
+}
+
+/* =========================
+   2. NAVBAR
+   ========================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  height: var(--nav-height);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  isolation: isolate;
+  background: rgba(8, 8, 6, 0.95);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo,
+.nav-links,
+.nav-monitor {
+  position: absolute;
+  z-index: 3;
+}
+
+.logo {
+  top: 50%;
+  left: 40px;
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  transform: translateY(-50%);
+  transition: color 0.25s ease;
+}
+
+.logo:hover {
+  color: var(--yellow);
+}
+
+.nav-links {
+  top: 50%;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  transform: translateY(-50%);
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: var(--yellow);
+}
+
+/* =========================
+   3. WATCHER
+   ========================= */
+
+.navbar-watcher {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  z-index: 4;
+  width: 70px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%) scale(1.15);
+}
+
+.watcher-glow {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background: var(--yellow);
+  opacity: 0.12;
+  filter: blur(24px);
+  animation: watcherGlow 3s ease-in-out infinite;
+}
+
+.watcher-housing {
+  position: relative;
+  width: 52px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--yellow);
+  border-radius: 50%;
+  background: rgba(5, 5, 5, 0.85);
+  box-shadow:
+    0 0 10px rgba(230, 194, 41, 0.25),
+    inset 0 0 12px rgba(230, 194, 41, 0.08);
+}
+
+.watcher-housing::before,
+.watcher-housing::after {
+  content: '';
+  position: absolute;
+  height: 5px;
+  border: 1px solid var(--yellow);
+}
+
+.watcher-housing::before {
+  top: -6px;
+  width: 20px;
+  border-bottom: none;
+  opacity: 0.7;
+}
+
+.watcher-housing::after {
+  bottom: -6px;
+  width: 14px;
+  border-top: none;
+  opacity: 0.5;
+}
+
+.watcher-eye {
+  position: relative;
+  width: 34px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #b8b8b0;
+  border-radius: 65% 35% 65% 35% / 55% 45% 55% 45%;
+  box-shadow: 0 0 8px rgba(230, 194, 41, 0.25);
+}
+
+.watcher-iris {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #353535;
+  transform: translate(var(--watcher-x, 0px), var(--watcher-y, 0px));
+  transition: transform 0.08s ease-out;
+}
+
+.watcher-pupil {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #050505;
+}
+
+@keyframes watcherGlow {
+  0%, 100% { opacity: 0.08; transform: scale(0.95); }
+  50% { opacity: 0.16; transform: scale(1.05); }
+}
+
+/* =========================
+   4. SIGNAL / DEPTH HUD
+   ========================= */
+
+.nav-monitor {
+  top: 40px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  transform: translateY(-50%);
+}
+
+.nav-monitor-signal {
+  right: calc(50% + 60px);
+  text-align: right;
+}
+
+.nav-monitor-depth {
+  left: calc(50% + 60px);
+  text-align: left;
+}
+
+.depth-display {
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.signal-display {
+  position: relative;
+  display: inline-block;
+  color: var(--yellow);
+  opacity: 0.85;
+  white-space: nowrap;
+  transition: color 0.3s ease, opacity 0.4s ease, text-shadow 0.3s ease;
+}
+
+/* STABLE: 000–029m */
+.signal-display[data-signal='STABLE'] {
+  color: var(--yellow);
+  text-shadow: none;
+  animation: none;
+}
+
+/* UNSTABLE: 030–059m */
+.signal-display[data-signal='UNSTABLE'] {
+  color: var(--yellow-bright);
+  text-shadow: 0 0 6px rgba(230, 194, 41, 0.3);
+  animation: signalStutter 4s infinite;
+}
+
+@keyframes signalStutter {
+  0%, 87%, 93%, 100% { opacity: 1; transform: translateX(0); }
+  89% { opacity: 0.5; transform: translateX(2px); }
+  91% { opacity: 0.9; transform: translateX(-1px); }
+}
+
+/* WEAK: 060–089m */
+.signal-display[data-signal='WEAK'] {
+  color: #c99335;
+  text-shadow: 0 0 8px rgba(230, 194, 41, 0.2);
+  animation: signalWeak 3s steps(1, end) infinite;
+}
+
+@keyframes signalWeak {
+  0%, 65%, 80%, 100% { opacity: 0.85; }
+  67%, 77% { opacity: 0.2; }
+  70%, 82% { opacity: 1; }
+}
+
+/* UNKNOWN: 090m+ */
+.signal-display[data-signal='UNKNOWN'] {
+  color: #e35a50;
+  text-shadow: 0 0 8px rgba(227, 90, 80, 0.5);
+  animation: signalCorrupt 2s steps(1, end) infinite;
+}
+
+@keyframes signalCorrupt {
+  0%, 75%, 85%, 100% { transform: translateX(0); }
+  78% { transform: translateX(-2px); }
+  81% { transform: translateX(3px); }
+  90% { transform: translateX(-1px); }
+}
+
+.signal-display[data-signal='UNKNOWN']::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--yellow);
+  pointer-events: none;
+  opacity: 0;
+  animation: signalGhost 2s steps(1, end) infinite;
+}
+
+@keyframes signalGhost {
+  0%, 75%, 85%, 100% { opacity: 0; transform: translateX(0); }
+  78% { opacity: 0.8; transform: translateX(3px); }
+  81% { opacity: 0.6; transform: translateX(-3px); }
+}
+
+/* =========================
+   5. HERO / EYES
+   ========================= */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.hero-content {
+  max-width: 900px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 1.5rem;
+  color: var(--yellow);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+}
+
+h1 {
+  margin: 0;
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(5rem, 15vw, 12rem);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+}
+
+.description {
+  max-width: 500px;
+  margin: 2rem auto 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.eye-position {
+  position: absolute;
+  width: 55px;
+  height: 35px;
+  z-index: 5;
+  pointer-events: auto;
+}
+
+.eye-left-1 { top: 12%; left: 20px; }
+.eye-left-2 { top: 30%; left: -10px; }
+.eye-left-3 { top: 52%; left: 30px; }
+.eye-left-4 { top: 75%; left: -15px; }
+.eye-right-1 { top: 18%; right: 30px; }
+.eye-right-2 { top: 45%; right: -10px; }
+.eye-right-3 { top: 72%; right: 35px; }
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.primary-button,
+.secondary-button {
+  padding: 0.85rem 1.5rem;
+  font-size: 0.8rem;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.primary-button {
+  color: var(--bg);
+  background: var(--yellow);
+  border: 1px solid var(--yellow);
+}
+
+.primary-button:hover {
+  background: var(--yellow-bright);
+  box-shadow: 0 0 30px rgba(230, 194, 41, 0.2);
+}
+
+.secondary-button {
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.secondary-button:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
+}
+
+/* =========================
+   6. ABOUT / CORRUPTED FILE
+   ========================= */
+
+.about {
+  position: relative;
+  min-height: 100vh;
+  padding: 120px 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-family: 'Courier New', monospace;
+  border-top: 1px solid currentColor;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.01), transparent 40%),
+    #010101;
+}
+
+.system-header {
+  width: 100%;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  border: 1px solid currentColor;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.system-header::after {
+  content: '████';
+  margin-left: 20px;
+  opacity: 0.3;
+}
+
+.system-content {
+  max-width: 1000px;
+  margin: 45px auto 0;
+}
+
+.system-line {
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+
+.subject-info {
+  padding: 25px 0;
+  border-top: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+}
+
+.subject-info p {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+
+.subject-info span { opacity: 0.5; }
+
+.system-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 60px;
+}
+
+.system-title {
+  margin: 0 0 25px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+}
+
+.capabilities,
+.observation {
+  padding: 30px;
+  border: 1px solid currentColor;
+}
+
+.capabilities p:not(.system-title) {
+  position: relative;
+  margin: 18px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed currentColor;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+.observation {
+  position: relative;
+}
+
+.observation p:not(.system-title) {
+  max-width: 500px;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  opacity: 0.8;
+}
+
+.objective {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  line-height: 1.5;
+}
+
+.warning {
+  margin-top: 80px;
+  padding: 25px;
+  border: 1px dashed currentColor;
+  font-size: 0.8rem;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.warning::first-line { font-weight: bold; }
+
+/* =========================
+   7. RESPONSIVE LAYOUT
+   ========================= */
+
+@media (max-width: 850px) {
+  .portfolio {
+    --nav-height: 76px;
+    --beam-origin: 63px;
+  }
+
+  .navbar { padding: 0 16px; }
+  .logo { left: 16px; font-size: 0.9rem; }
+  .nav-links { right: 16px; gap: 1rem; }
+  .nav-links a { font-size: 0.75rem; }
+  .nav-monitor { display: none; }
+  .navbar-watcher { top: 13px; transform: translateX(-50%) scale(1); }
+}
+
+@media (max-width: 700px) {
+  .logo { letter-spacing: 0.12em; }
+  .nav-links { gap: 0.75rem; }
+  .nav-links a { font-size: 0.65rem; }
+
+  .hero { padding: 5rem 1.5rem 2rem; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .primary-button,
+  .secondary-button { width: 180px; text-align: center; }
+
+  .system-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-display,
+  .signal-display::after { animation: none !important; }
+  .signal-display::after { display: none; }
+}
+
+/* =========================
+   ABOUT FILE CORRUPTION
+   ========================= */
+
+.warning {
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.warning.corrupted {
+  color: #e35a50;
+
+  border-color: #e35a50;
+
+  text-shadow:
+    0 0 8px rgba(227, 90, 80, 0.35);
+
+  box-shadow:
+    0 0 18px rgba(227, 90, 80, 0.08);
+
+  animation: warningGlitch 3s steps(1, end) infinite;
+}
+
+/* =========================
+   GLITCH EFFECT
+   ========================= */
+
+@keyframes warningGlitch {
+  0%, 86%, 92%, 100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  88% {
+    opacity: 0.45;
+    transform: translateX(-3px);
+  }
+
+  90% {
+    opacity: 0.85;
+    transform: translateX(2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .warning.corrupted {
+    animation: none;
+  }
+}
+
+
+/* =========================
+   EXPERIMENT ARCHIVE
+   ========================= */
+
+.projects {
+  min-height: 100vh;
+  padding: 120px 10%;
+  position: relative;
+
+  background: #010101;
+  font-family: "Courier New", monospace;
+
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 90px;
+}
+
+.projects-header {
+  margin-bottom: 60px;
+}
+
+.archive-label {
+  color: var(--yellow);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+}
+
+.projects h2 {
+  margin: 20px 0;
+
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  letter-spacing: 0.04em;
+
+  color: var(--text);
+}
+
+.archive-description {
+  max-width: 600px;
+
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* =========================
+   EXPERIMENT CARDS
+   ========================= */
+
+.experiment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.experiment-card {
+  min-width: 0;
+  padding: 28px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.experiment-card:hover {
+  transform: translateY(-6px);
+
+  border-color: var(--yellow);
+
+  box-shadow:
+    0 0 30px rgba(230, 194, 41, 0.08);
+}
+
+.experiment-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+
+  color: var(--text-muted);
+}
+
+.experiment-status {
+  color: var(--yellow);
+}
+
+.experiment-card h3 {
+  margin: 45px 0 20px;
+
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.experiment-card > p {
+  min-height: 120px;
+
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.experiment-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-top: 30px;
+}
+
+.experiment-tech span {
+  padding: 7px 10px;
+
+  border: 1px solid var(--border);
+
+  font-size: 0.65rem;
+  color: var(--yellow);
+}
+
+/* =========================
+   ARCHIVE WARNING
+   ========================= */
+
+.archive-warning {
+  margin-top: 80px;
+
+  color: var(--yellow-dark);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  line-height: 2;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1000px) {
+  .experiment-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .experiment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects {
+    padding: 100px 6%;
+  }
+
+  .experiment-card > p {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experiment-card {
+    transition: none;
+  }
+
+  .experiment-card:hover {
+    transform: none;
+  }
+}
+
+
+/* =========================
+   LIGHT POSITION TRACKERS
+   ========================= */
+
+.beam-point {
+  position: absolute;
+  left: 50%;
+
+  width: 0;
+  height: 0;
+
+  pointer-events: none;
+}
+
+.beam-point-start {
+  top: 0;
+}
+
+.beam-point-end {
+  bottom: 0;
+}
+
+
+/* =========================
+   HIDDEN EXPERIMENT RECORD
+   ========================= */
+
+.experiment-secret {
+  min-height: 90px;
+  margin-top: 25px;
+  padding-top: 15px;
+
+  border-top: 1px dashed var(--border);
+
+  opacity: 0;
+  transform: translateY(6px);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.experiment-secret-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--yellow);
+}
+
+.experiment-secret p {
+  margin-top: 12px;
+
+  font-size: 0.8rem;
+  line-height: 1.7;
+
+  color: #e35a50;
+  text-shadow: 0 0 8px rgba(227, 90, 80, 0.25);
+}
+
+
+/* =========================
+   REVEALED BY WATCHER LIGHT
+   ========================= */
+
+.experiment-card.is-illuminated .experiment-secret {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================
+   ACCESSIBILITY
+   ========================= */
+
+.experiment-card:focus-visible .experiment-secret {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experiment-secret {
+    transition: none;
+  }
+}
+
+
+/* =========================
+   HIDDEN CAVE WALL
+   ========================= */
+
+.cave-wall {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin-top: 35px;
+
+  border-top: 1px solid rgba(230, 194, 41, 0.05);
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(230, 194, 41, 0.012),
+      transparent 75%
+    );
+}
+
+
+/* =========================
+   HIDDEN WRITINGS
+   ========================= */
+
+.cave-whisper {
+  position: absolute;
+
+  width: min(42%, 260px);
+
+  font-family: "Courier New", monospace;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+
+/* ---------- LEFT ---------- */
+
+.cave-whisper-left {
+  top: 18%;
+  left: 2%;
+  right: auto;
+
+  text-align: left;
+
+  transform: translateY(5px) rotate(-3deg);
+}
+
+
+/* ---------- RIGHT ---------- */
+
+.cave-whisper-right {
+  top: 55%;
+  right: 2%;
+  left: auto;
+
+  text-align: right;
+
+  transform: translateY(5px) rotate(3deg);
+}
+
+
+/* =========================
+   TRANSMISSION TEXT
+   ========================= */
+
+.whisper-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+
+  color: var(--yellow-dark);
+}
+
+.cave-whisper .whisper-copy {
+  margin-top: 12px;
+
+  color: #e35a50;
+
+  font-size: 0.85rem;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+
+  text-shadow:
+    0 0 8px rgba(227, 90, 80, 0.4);
+}
+
+
+/* =========================
+   REVEALED BY LIGHT
+   ========================= */
+
+.cave-whisper.is-illuminated {
+  opacity: 1;
+}
+
+
+/* =========================
+   KEYBOARD ACCESSIBILITY
+   ========================= */
+
+.cave-whisper:focus-visible {
+  opacity: 1;
+  outline: 1px dashed var(--yellow);
+  outline-offset: 8px;
+}
+
+
+/* =========================
+   SMALL SCREENS
+   ========================= */
+
+@media (max-width: 700px) {
+  .cave-wall {
+    height: 360px;
+  }
+
+  .cave-whisper {
+    width: 46%;
+  }
+
+  .cave-whisper .whisper-copy {
+    font-size: 0.68rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cave-whisper {
+    transition: none;
+    transform: none;
+  }
+}
+
+
+/* =====================================
+   THE EIGHTH EYE
+   ===================================== */
+
+/* Smooth transition between normal and corrupted states */
+
+.watcher-housing {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.watcher-pupil {
+  transition: background 0.3s ease;
+}
+
+
+/* =====================================
+   SECRET DETECTED
+   ===================================== */
+
+/*
+  When the RIGHT cave transmission is
+  illuminated, the Watcher reacts.
+*/
+
+.portfolio:has(.cave-whisper-right.is-illuminated)
+.watcher-housing {
+  border-color: #e35a50;
+
+  box-shadow:
+    0 0 18px rgba(227, 90, 80, 0.6),
+    inset 0 0 15px rgba(227, 90, 80, 0.25);
+
+  animation: watcherDisturbance 0.2s steps(2, end) infinite;
+}
+
+
+/* Red pupil */
+
+.portfolio:has(.cave-whisper-right.is-illuminated)
+.watcher-pupil {
+  background: #e35a50;
+
+  box-shadow:
+    0 0 8px #e35a50,
+    0 0 15px rgba(227, 90, 80, 0.5);
+}
+
+
+/* Red glow */
+
+.portfolio:has(.cave-whisper-right.is-illuminated)
+.watcher-glow {
+  background: #e35a50;
+}
+
+
+/* =====================================
+   HIDDEN IDENTITY
+   ===================================== */
+
+.navbar-watcher::after {
+  content: "OBSERVER_008 // ACTIVE";
+
+  position: absolute;
+
+  top: 100%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  white-space: nowrap;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+
+  color: #e35a50;
+
+  text-shadow:
+    0 0 8px rgba(227, 90, 80, 0.5);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.25s ease;
+}
+
+
+.portfolio:has(.cave-whisper-right.is-illuminated)
+.navbar-watcher::after {
+  opacity: 1;
+}
+
+
+/* =====================================
+   MECHANICAL DISTURBANCE
+   ===================================== */
+
+@keyframes watcherDisturbance {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateX(-1px) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateX(1px) rotate(1deg);
+  }
+
+  75% {
+    transform: translateX(-1px) rotate(2deg);
+  }
+}
+
+
+/* =====================================
+   ACCESSIBILITY
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio:has(.cave-whisper-right.is-illuminated)
+  .watcher-housing {
+    animation: none;
+  }
+}
+
+/* =========================
+   EIGHTH EYE SECRET
+   ========================= */
+
+.eighth-record {
+  position: absolute;
+
+  top: 8%;
+  left: 50%;
+
+  width: 300px;
+  max-width: 90%;
+
+  padding: 20px;
+
+  transform: translate(-50%, 10px);
+
+  background: rgba(8, 8, 6, 0.9);
+
+  border: 1px dashed #e35a50;
+
+  font-family: "Courier New", monospace;
+  text-align: center;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    visibility 0.5s;
+}
+
+.eighth-record-label {
+  color: #e35a50;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+}
+
+.eighth-record p {
+  color: var(--text);
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+
+.eighth-record-warning {
+  color: #e35a50 !important;
+
+  text-shadow:
+    0 0 10px rgba(227, 90, 80, 0.5);
+}
+
+/* =========================
+   AWAKENED WATCHER
+   ========================= */
+
+.cave-wall:has(
+  .cave-whisper-right.is-illuminated,
+  .cave-whisper-right:focus-visible
+) .eighth-record {
+  opacity: 1;
+  visibility: visible;
+
+  transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eighth-record {
+    transition: none;
+  }
+}
+
+
+/* =====================================
+   INSTRUMENT CHAMBER
+   ===================================== */
+
+.instruments {
+  position: relative;
+
+  min-height: 100vh;
+  padding: 120px 10%;
+
+  background: #010101;
+
+  border-top: 1px solid var(--border);
+
+  font-family: "Courier New", monospace;
+
+  scroll-margin-top: 90px;
+}
+
+
+/* =====================================
+   CHAMBER HEADER
+   ===================================== */
+
+.instruments-header {
+  max-width: 750px;
+  margin-bottom: 70px;
+}
+
+.instrument-label {
+  color: var(--yellow);
+
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+}
+
+.instruments-header h2 {
+  margin: 20px 0;
+
+  color: var(--text);
+
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.instruments-header > p:not(.instrument-label) {
+  max-width: 600px;
+
+  color: var(--text-muted);
+
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+
+/* =====================================
+   TERMINAL GRID
+   ===================================== */
+
+.instrument-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+
+/* =====================================
+   TERMINAL PANEL
+   ===================================== */
+
+.instrument-panel {
+  position: relative;
+
+  min-width: 0;
+  min-height: 380px;
+
+  padding: 30px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(230, 194, 41, 0.035),
+      transparent 65%
+    ),
+    var(--surface);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    inset 0 0 25px rgba(0, 0, 0, 0.6);
+
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
+
+
+/* =====================================
+   METAL TERMINAL EDGE
+   ===================================== */
+
+.instrument-panel::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--yellow-dark),
+      transparent
+    );
+
+  opacity: 0.6;
+}
+
+
+/* =====================================
+   OLD DISPLAY SCANLINES
+   ===================================== */
+
+.instrument-panel::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(0, 0, 0, 0.13) 4px
+    );
+
+  opacity: 0.45;
+}
+
+
+/* =====================================
+   TERMINAL HOVER
+   ===================================== */
+
+.instrument-panel:hover {
+  transform: translateY(-5px);
+
+  border-color: var(--yellow-dark);
+
+  box-shadow:
+    0 0 25px rgba(230, 194, 41, 0.08),
+    inset 0 0 30px rgba(230, 194, 41, 0.03);
+}
+
+
+/* =====================================
+   MODULE INFORMATION
+   ===================================== */
+
+.instrument-id {
+  display: block;
+
+  margin-bottom: 50px;
+
+  color: var(--yellow-dark);
+
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+
+.instrument-panel h3 {
+  margin: 0 0 12px;
+
+  color: var(--text);
+
+  font-size: 1.55rem;
+  letter-spacing: 0.07em;
+}
+
+.instrument-category {
+  margin-bottom: 35px;
+
+  color: var(--yellow);
+
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+
+/* =====================================
+   TECHNOLOGY LIST
+   ===================================== */
+
+.instrument-panel ul {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.instrument-panel li {
+  position: relative;
+
+  padding: 14px 0 14px 20px;
+
+  color: var(--text-muted);
+
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+
+  border-bottom:
+    1px dashed rgba(230, 194, 41, 0.12);
+
+  transition:
+    color 0.25s ease,
+    padding-left 0.25s ease;
+}
+
+.instrument-panel li::before {
+  content: ">";
+
+  position: absolute;
+  left: 0;
+
+  color: var(--yellow-dark);
+}
+
+.instrument-panel li:hover {
+  color: var(--yellow);
+  padding-left: 25px;
+}
+
+
+/* =====================================
+   CHAMBER WARNING
+   ===================================== */
+
+.instrument-warning {
+  margin-top: 85px;
+  padding: 18px 22px;
+
+  color: #e35a50;
+
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+
+  border-left: 2px solid #e35a50;
+
+  background: rgba(227, 90, 80, 0.025);
+}
+
+
+/* =====================================
+   RESPONSIVE
+   ===================================== */
+
+@media (max-width: 1000px) {
+  .instrument-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .instruments {
+    padding: 100px 6%;
+  }
+
+  .instrument-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .instrument-panel {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .instrument-panel,
+  .instrument-panel li {
+    transition: none;
+  }
+
+  .instrument-panel:hover {
+    transform: none;
+  }
+}
+
+
+/* =====================================
+   FORBIDDEN TERMINAL
+   ===================================== */
+
+.instrument-panel-archive {
+  isolation: isolate;
+}
+
+/* Hidden terminal screen */
+
+.instrument-terminal {
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 26px;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(230, 194, 41, 0.055),
+      transparent 75%
+    ),
+    #080806;
+
+  border: 1px solid var(--yellow-dark);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: translateY(8px);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    visibility 0.35s ease;
+}
+
+
+/* =====================================
+   TERMINAL ACTIVATION
+   ===================================== */
+
+.instrument-panel-archive.is-illuminated
+.instrument-terminal,
+
+.instrument-panel-archive:focus-visible
+.instrument-terminal {
+  opacity: 1;
+  visibility: visible;
+
+  transform: translateY(0);
+}
+
+/* Highlight active hardware */
+
+.instrument-panel-archive.is-illuminated,
+.instrument-panel-archive:focus-visible {
+  border-color: var(--yellow);
+
+  box-shadow:
+    0 0 25px rgba(230, 194, 41, 0.15),
+    inset 0 0 25px rgba(230, 194, 41, 0.08);
+}
+
+
+/* =====================================
+   TERMINAL HEADER
+   ===================================== */
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid var(--border);
+
+  color: var(--yellow);
+
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.terminal-indicator {
+  width: 8px;
+  height: 8px;
+
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  background: var(--yellow-bright);
+
+  box-shadow:
+    0 0 8px var(--yellow),
+    0 0 16px rgba(230, 194, 41, 0.45);
+
+  animation: terminalPulse 1.5s ease-in-out infinite;
+}
+
+
+/* =====================================
+   TERMINAL SCREEN
+   ===================================== */
+
+.terminal-screen {
+  flex: 1;
+
+  padding-top: 30px;
+
+  font-family: "Courier New", monospace;
+}
+
+.terminal-screen p {
+  margin-bottom: 16px;
+
+  color: var(--text-muted);
+
+  font-size: 0.75rem;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+}
+
+.terminal-screen .terminal-warning {
+  color: #e35a50;
+}
+
+.terminal-screen .terminal-final {
+  margin-top: 28px;
+
+  color: var(--yellow-bright);
+
+  text-shadow:
+    0 0 10px rgba(230, 194, 41, 0.4);
+}
+
+
+/* =====================================
+   BLINKING CURSOR
+   ===================================== */
+
+.terminal-cursor {
+  display: inline-block;
+
+  color: var(--yellow-bright);
+
+  animation: terminalBlink 0.8s steps(1) infinite;
+}
+
+
+/* =====================================
+   TERMINAL FOOTER
+   ===================================== */
+
+.terminal-footer {
+  display: block;
+
+  padding-top: 15px;
+
+  border-top: 1px dashed var(--border);
+
+  color: #e35a50;
+
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+}
+
+
+/* =====================================
+   ANIMATIONS
+   ===================================== */
+
+@keyframes terminalPulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes terminalBlink {
+  0%, 49% {
+    opacity: 1;
+  }
+
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+
+/* =====================================
+   MOBILE
+   ===================================== */
+
+@media (max-width: 700px) {
+  .instrument-terminal {
+    padding: 20px;
+  }
+
+  .terminal-screen {
+    padding-top: 20px;
+  }
+
+  .terminal-screen p {
+    font-size: 0.68rem;
+    margin-bottom: 10px;
+  }
+}
+
+
+/* =====================================
+   REDUCED MOTION
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .instrument-terminal {
+    transition: none;
+  }
+
+  .terminal-indicator,
+  .terminal-cursor {
+    animation: none;
+  }
+}
+
+
+/* =====================================
+   THE FINAL TRANSMISSION
+   ===================================== */
+
+.transmission {
+  position: relative;
+
+  min-height: 100vh;
+  padding: 130px 10% 110px;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 75%,
+      rgba(230, 194, 41, 0.025),
+      transparent 65%
+    ),
+    #050504;
+
+  border-top: 1px solid var(--border);
+
+  font-family: "Courier New", monospace;
+
+  scroll-margin-top: 90px;
+}
+
+
+/* =====================================
+   CHAMBER HEADER
+   ===================================== */
+
+.transmission-header {
+  max-width: 850px;
+  margin-bottom: 70px;
+}
+
+.transmission-label {
+  color: var(--yellow);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+}
+
+.transmission-header h2 {
+  margin: 22px 0;
+
+  color: var(--text);
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+}
+
+.transmission-header > p:not(.transmission-label) {
+  max-width: 610px;
+
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+
+/* =====================================
+   COMMUNICATION TERMINAL
+   ===================================== */
+
+.transmission-terminal {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(230, 194, 41, 0.045),
+      transparent 75%
+    ),
+    #0b0c08;
+
+  border: 1px solid var(--yellow-dark);
+
+  box-shadow:
+    0 0 45px rgba(230, 194, 41, 0.035),
+    inset 0 0 65px rgba(0, 0, 0, 0.65);
+}
+
+
+/* OLD MONITOR SCANLINES */
+
+.transmission-terminal::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 3;
+  pointer-events: none;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(0, 0, 0, 0.18) 4px
+    );
+
+  opacity: 0.5;
+}
+
+
+/* =====================================
+   TERMINAL HEADER
+   ===================================== */
+
+.transmission-terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+  padding: 22px 30px;
+
+  border-bottom: 1px solid var(--border);
+
+  background: rgba(230, 194, 41, 0.035);
+
+  color: var(--yellow);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+
+/* =====================================
+   CONNECTION STATUS
+   ===================================== */
+
+.transmission-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  white-space: nowrap;
+
+  color: var(--yellow-bright);
+  font-size: 0.65rem;
+}
+
+.transmission-status::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--yellow-bright);
+
+  box-shadow:
+    0 0 10px var(--yellow),
+    0 0 20px rgba(230, 194, 41, 0.5);
+
+  animation: transmissionSignal 4.5s steps(1) infinite;
+}
+
+
+/* =====================================
+   SYSTEM LOG
+   ===================================== */
+
+.transmission-log {
+  position: relative;
+
+  min-height: 300px;
+
+  padding: 45px 35px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(230, 194, 41, 0.018),
+      transparent 65%
+    );
+}
+
+.transmission-log p {
+  margin: 0 0 18px;
+
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+}
+
+
+/* SUCCESS MESSAGE */
+
+.transmission-log .transmission-success {
+  color: var(--yellow-bright);
+
+  text-shadow:
+    0 0 12px rgba(230, 194, 41, 0.4);
+}
+
+
+/* UNSETTLING WARNING */
+
+.transmission-log .transmission-alert {
+  margin-top: 35px;
+
+  color: #e35a50;
+
+  text-shadow:
+    0 0 10px rgba(227, 90, 80, 0.5);
+
+  animation: transmissionWarning 6s steps(1) infinite;
+}
+
+
+/* =====================================
+   COMMUNICATION CHANNELS
+   ===================================== */
+
+.transmission-channels {
+  padding: 30px 35px 40px;
+
+  border-top: 1px dashed var(--border);
+}
+
+.transmission-instruction {
+  margin-bottom: 25px;
+
+  color: var(--yellow-dark);
+  font-size: 0.7rem;
+  letter-spacing: 0.13em;
+}
+
+
+/* =====================================
+   TRANSMISSION BUTTONS
+   ===================================== */
+
+.transmission-button {
+  display: block;
+
+  width: 100%;
+  padding: 19px 24px;
+  margin-bottom: 15px;
+
+  text-decoration: none;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+
+  border: 1px solid var(--border);
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* PRIMARY: SEND TRANSMISSION */
+
+.transmission-primary {
+  color: #080806;
+
+  background: var(--yellow);
+
+  border-color: var(--yellow);
+}
+
+.transmission-primary:hover {
+  background: var(--yellow-bright);
+
+  box-shadow:
+    0 0 25px rgba(230, 194, 41, 0.2);
+}
+
+
+/* SECONDARY: GITHUB */
+
+.transmission-secondary {
+  color: var(--yellow);
+
+  background: transparent;
+
+  border-color: var(--yellow-dark);
+}
+
+.transmission-secondary:hover {
+  color: var(--yellow-bright);
+
+  background: rgba(230, 194, 41, 0.07);
+
+  border-color: var(--yellow);
+}
+
+.transmission-button:focus-visible {
+  outline: 2px solid var(--yellow-bright);
+  outline-offset: 4px;
+}
+
+
+/* =====================================
+   TERMINAL FOOTER
+   ===================================== */
+
+.transmission-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 15px;
+  padding: 20px 30px;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  border-top: 1px solid var(--border);
+
+  color: var(--yellow-dark);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+}
+
+
+/* =====================================
+   THE FINAL MESSAGE
+   ===================================== */
+
+.transmission-ending {
+  margin: 100px auto 0;
+
+  color: #e35a50;
+
+  font-size: 0.85rem;
+  line-height: 2.2;
+  letter-spacing: 0.15em;
+
+  text-align: center;
+
+  text-shadow:
+    0 0 12px rgba(227, 90, 80, 0.35);
+
+  animation:
+    transmissionEnding 9s steps(1) infinite;
+}
+
+
+/* =====================================
+   ANIMATIONS
+   ===================================== */
+
+/* Occasional signal interruption */
+
+@keyframes transmissionSignal {
+
+  0%, 65%, 68%, 100% {
+    opacity: 1;
+  }
+
+  66%, 67% {
+    opacity: 0.05;
+  }
+
+  69% {
+    opacity: 0.4;
+  }
+
+  70% {
+    opacity: 1;
+  }
+}
+
+
+/* The warning briefly loses power */
+
+@keyframes transmissionWarning {
+
+  0%, 80%, 83%, 100% {
+    opacity: 1;
+  }
+
+  81% {
+    opacity: 0.15;
+  }
+
+  82% {
+    opacity: 0.65;
+  }
+}
+
+
+/* Final message flicker */
+
+@keyframes transmissionEnding {
+
+  0%, 90%, 93%, 100% {
+    opacity: 0.8;
+  }
+
+  91% {
+    opacity: 0.1;
+  }
+
+  92% {
+    opacity: 1;
+  }
+}
+
+
+/* =====================================
+   RESPONSIVE
+   ===================================== */
+
+@media (max-width: 700px) {
+
+  .transmission {
+    padding: 100px 6%;
+  }
+
+  .transmission-header {
+    margin-bottom: 45px;
+  }
+
+  .transmission-terminal-header {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .transmission-log {
+    min-height: 270px;
+    padding: 30px 20px;
+  }
+
+  .transmission-log p {
+    font-size: 0.72rem;
+  }
+
+  .transmission-channels {
+    padding: 25px 20px;
+  }
+
+  .transmission-button {
+    font-size: 0.7rem;
+    padding: 17px 16px;
+  }
+
+  .transmission-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .transmission-ending {
+    margin-top: 70px;
+    font-size: 0.7rem;
+  }
+
+}
+
+
+/* =====================================
+   REDUCED MOTION
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .transmission-status::before,
+  .transmission-alert,
+  .transmission-ending {
+    animation: none;
+    opacity: 1;
+  }
+
+  .transmission-button {
+    transition: none;
+  }
+
+}
+
+
+/* =====================================
+   TRANSMISSION BOOT SEQUENCE
+   ===================================== */
+
+/* Manual activation button */
+
+.transmission-boot-button {
+  display: inline-block;
+
+  margin-top: 25px;
+  padding: 14px 22px;
+
+  background: transparent;
+
+  color: var(--yellow);
+
+  border: 1px solid var(--yellow-dark);
+
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.transmission-boot-button:hover {
+  background: rgba(230, 194, 41, 0.08);
+
+  box-shadow:
+    0 0 18px rgba(230, 194, 41, 0.12);
+}
+
+.transmission-boot-button:focus-visible {
+  outline: 2px solid var(--yellow-bright);
+  outline-offset: 4px;
+}
+
+
+/* Offline / connecting indicator */
+
+.transmission-terminal:not(.is-online)
+.transmission-status::before {
+  background: #e35a50;
+
+  box-shadow:
+    0 0 8px rgba(227, 90, 80, 0.5);
+}
+
+
+/* Permanent online state */
+
+.transmission-terminal.is-online {
+  border-color: var(--yellow);
+
+  box-shadow:
+    0 0 35px rgba(230, 194, 41, 0.09),
+    inset 0 0 45px rgba(230, 194, 41, 0.035);
+}
+
+
+/* =====================================
+   THE DESCENT SHAFT
+   ===================================== */
+
+.descent-shaft {
+  position: relative;
+
+  min-height: 420px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 60px 20px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(230, 194, 41, 0.025),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      #050504 0%,
+      #010101 50%,
+      #050504 100%
+    );
+
+  font-family: "Courier New", monospace;
+}
+
+
+/* =====================================
+   CAVE WALLS
+   ===================================== */
+
+.descent-shaft::before,
+.descent-shaft::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  width: 25%;
+
+  background: #0b0b08;
+
+  pointer-events: none;
+}
+
+.descent-shaft::before {
+  left: 0;
+
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    65% 18%,
+    85% 40%,
+    55% 65%,
+    80% 85%,
+    60% 100%,
+    0 100%
+  );
+}
+
+.descent-shaft::after {
+  right: 0;
+
+  clip-path: polygon(
+    40% 0,
+    100% 0,
+    100% 100%,
+    20% 100%,
+    45% 75%,
+    15% 48%,
+    35% 22%
+  );
+}
+
+
+/* =====================================
+   CENTER CONTENT
+   ===================================== */
+
+.descent-content {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 16px;
+
+  text-align: center;
+}
+
+.descent-label,
+.descent-bottom {
+  color: var(--yellow-dark);
+
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+}
+
+.descent-line {
+  width: 1px;
+  height: 60px;
+
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--yellow-dark),
+    transparent
+  );
+}
+
+.descent-symbol {
+  color: var(--yellow);
+
+  font-size: 2rem;
+
+  animation: descentPulse 3s ease-in-out infinite;
+}
+
+.descent-content h3 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+}
+
+.descent-warning {
+  color: #e35a50;
+
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+}
+
+
+/* =====================================
+   ANIMATION
+   ===================================== */
+
+@keyframes descentPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateY(-4px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(4px);
+  }
+}
+
+
+/* =====================================
+   RESPONSIVE
+   ===================================== */
+
+@media (max-width: 700px) {
+  .descent-shaft {
+    min-height: 350px;
+  }
+
+  .descent-shaft::before,
+  .descent-shaft::after {
+    width: 16%;
+  }
+
+  .descent-content h3 {
+    font-size: 0.9rem;
+  }
+
+  .descent-warning {
+    font-size: 0.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .descent-symbol {
+    animation: none;
+  }
+}
+
+/* =====================================
+   THE FRACTURED PASSAGE
+   ===================================== */
+
+.fractured-passage {
+  position: relative;
+
+  min-height: 320px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 60px 20px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(230, 194, 41, 0.025),
+      transparent 65%
+    ),
+    #060605;
+
+  font-family: "Courier New", monospace;
+}
+
+
+/* =====================================
+   FRACTURED CAVE WALLS
+   ===================================== */
+
+.fractured-passage::before,
+.fractured-passage::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  width: 25%;
+
+  background: #10100b;
+
+  pointer-events: none;
+}
+
+.fractured-passage::before {
+  left: 0;
+
+  clip-path: polygon(
+    0 0,
+    90% 0,
+    72% 20%,
+    95% 45%,
+    65% 60%,
+    85% 80%,
+    65% 100%,
+    0 100%
+  );
+}
+
+.fractured-passage::after {
+  right: 0;
+
+  clip-path: polygon(
+    25% 0,
+    100% 0,
+    100% 100%,
+    35% 100%,
+    10% 75%,
+    40% 50%,
+    15% 25%
+  );
+}
+
+
+/* =====================================
+   CONTENT
+   ===================================== */
+
+.fractured-content {
+  position: relative;
+  z-index: 1;
+
+  text-align: center;
+}
+
+.fractured-label {
+  color: var(--yellow-dark);
+
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+}
+
+.fractured-symbol {
+  margin: 25px 0;
+
+  color: var(--yellow);
+
+  font-size: 2.2rem;
+  font-weight: bold;
+
+  letter-spacing: 0.25em;
+
+  text-shadow:
+    0 0 15px rgba(230, 194, 41, 0.3);
+
+  animation: fractureFlicker 7s steps(1) infinite;
+}
+
+.fractured-message {
+  margin-bottom: 15px;
+
+  color: #e35a50;
+
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.fractured-submessage {
+  color: var(--text-muted);
+
+  font-size: 0.7rem;
+  line-height: 1.8;
+
+  letter-spacing: 0.08em;
+}
+
+.fractured-coordinates {
+  display: block;
+
+  margin-top: 35px;
+
+  color: var(--yellow-dark);
+
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+}
+
+
+/* =====================================
+   UNSTABLE SIGNAL
+   ===================================== */
+
+@keyframes fractureFlicker {
+
+  0%, 72%, 75%, 100% {
+    opacity: 0.8;
+    transform: translateX(0);
+  }
+
+  73% {
+    opacity: 0.1;
+    transform: translateX(-3px);
+  }
+
+  74% {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+}
+
+
+/* =====================================
+   MOBILE
+   ===================================== */
+
+@media (max-width: 700px) {
+
+  .fractured-passage {
+    min-height: 270px;
+  }
+
+  .fractured-passage::before,
+  .fractured-passage::after {
+    width: 15%;
+  }
+
+  .fractured-message {
+    font-size: 0.68rem;
+  }
+
+  .fractured-submessage {
+    font-size: 0.62rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fractured-symbol {
+    animation: none;
+  }
+}
+
+/* =====================================
+   THE UNSEEN PRESENCE
+   ===================================== */
+
+.presence-corridor {
+  position: relative;
+
+  min-height: 430px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 80px 20px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(230, 194, 41, 0.018),
+      transparent 70%
+    ),
+    #030302;
+
+  font-family: "Courier New", monospace;
+}
+
+
+/* =====================================
+   CORRIDOR CONTENT
+   ===================================== */
+
+.presence-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 700px;
+
+  text-align: center;
+  pointer-events: none;
+}
+
+.presence-label {
+  color: var(--yellow-dark);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+}
+
+.presence-content h2 {
+  margin: 25px 0;
+
+  color: var(--text);
+
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  letter-spacing: 0.12em;
+}
+
+.presence-message {
+  color: #e35a50;
+
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.presence-submessage {
+  margin-top: 20px;
+
+  color: var(--text-muted);
+
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.presence-warning {
+  display: block;
+
+  margin-top: 40px;
+
+  color: var(--yellow-dark);
+
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+}
+
+/* =====================================
+   ELDRITCH PRESENCE
+   ===================================== */
+
+.corridor-presence {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  opacity: 0.8;
+
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+/* When illuminated, the presence retreats */
+
+/* =====================================
+   TENTACLES RETREAT FROM LIGHT
+   ===================================== */
+
+.tentacle-cluster {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+
+  transition:
+    opacity 0.35s ease,
+    filter 0.35s ease;
+}
+
+/* Don't disappear completely */
+
+.tentacle-cluster.is-illuminated {
+  opacity: 0.32;
+
+  filter:
+    brightness(0.7);
+}
+
+/* Their eyes become reddish when exposed */
+
+.tentacle-cluster.is-illuminated
+.tentacle-eye {
+  border-color: rgba(227, 90, 80, 0.75);
+
+  box-shadow:
+    0 0 10px rgba(227, 90, 80, 0.65),
+    inset 0 0 5px rgba(227, 90, 80, 0.35);
+}
+
+.tentacle-cluster.is-illuminated
+.tentacle-eye::before {
+  background: #e35a50;
+
+  box-shadow:
+    0 0 8px rgba(227, 90, 80, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tentacle-cluster {
+    transition: none;
+  }
+}
+
+/* =====================================
+   TENTACLE CLUSTERS
+   ===================================== */
+
+/* Left side cluster */
+
+.tentacle-cluster-left {
+  top: 20%;
+  left: -20px;
+}
+
+/* Right side cluster */
+
+.tentacle-cluster-right {
+  top: 18%;
+  right: -20px;
+}
+
+/* =====================================
+   BASE TENTACLE
+   ===================================== */
+
+.tentacle {
+  position: absolute;
+
+  display: block;
+
+  width: 170px;
+  height: 22px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #161610 0%,
+      #2a2a1e 22%,
+      #43321f 55%,
+      #1a130d 100%
+    );
+
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.65),
+    0 0 14px rgba(120, 76, 22, 0.12);
+
+  filter: blur(0.4px);
+
+  transform-origin: left center;
+}
+
+/* subtle underside / texture */
+
+.tentacle::before {
+  content: "";
+
+  position: absolute;
+
+  left: 16%;
+  right: 10%;
+  top: 55%;
+
+  height: 30%;
+
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(147, 94, 35, 0.35),
+      transparent 70%
+    );
+
+  opacity: 0.8;
+}
+
+/* tip glow / wet eldritch sheen */
+
+.tentacle::after {
+  content: "";
+
+  position: absolute;
+
+  right: 4px;
+  top: 4px;
+
+  width: 18px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 35%,
+      rgba(230, 194, 41, 0.35),
+      rgba(139, 36, 36, 0.22) 45%,
+      transparent 75%
+    );
+
+  opacity: 0.45;
+}
+
+/* =====================================
+   LEFT TENTACLES
+   ===================================== */
+
+.tentacle-left-1 {
+  top: 30px;
+  left: 0;
+
+  width: 180px;
+
+  transform: rotate(10deg);
+
+  animation: tentacleSwayLeft1 7s ease-in-out infinite;
+}
+
+.tentacle-left-2 {
+  top: 95px;
+  left: 12px;
+
+  width: 210px;
+  height: 24px;
+
+  transform: rotate(-2deg);
+
+  animation: tentacleSwayLeft2 8s ease-in-out infinite;
+}
+
+.tentacle-left-3 {
+  top: 165px;
+  left: 0;
+
+  width: 165px;
+  height: 20px;
+
+  transform: rotate(-14deg);
+
+  animation: tentacleSwayLeft3 6.8s ease-in-out infinite;
+}
+
+/* =====================================
+   RIGHT TENTACLES
+   ===================================== */
+
+.tentacle-cluster-right .tentacle {
+  transform-origin: right center;
+}
+
+.tentacle-right-1 {
+  top: 25px;
+  right: 0;
+
+  width: 185px;
+
+  transform: rotate(-12deg);
+
+  animation: tentacleSwayRight1 7.6s ease-in-out infinite;
+}
+
+.tentacle-right-2 {
+  top: 95px;
+  right: 8px;
+
+  width: 215px;
+  height: 24px;
+
+  transform: rotate(4deg);
+
+  /* Sudden irregular twitch instead of the regular sway. */
+  animation: eldritchTwitch 11s ease-in-out infinite;
+}
+
+.tentacle-right-3 {
+  top: 165px;
+  right: 0;
+
+  width: 170px;
+  height: 20px;
+
+  transform: rotate(16deg);
+
+  animation: tentacleSwayRight3 6.5s ease-in-out infinite;
+}
+
+/* =====================================
+   TENTACLE MOTION
+   ===================================== */
+
+@keyframes tentacleSwayLeft1 {
+  0%, 100% { transform: rotate(10deg) translateX(0); }
+  50% { transform: rotate(15deg) translateX(8px); }
+}
+
+@keyframes tentacleSwayLeft2 {
+  0%, 100% { transform: rotate(-2deg) translateX(0); }
+  50% { transform: rotate(4deg) translateX(12px); }
+}
+
+@keyframes tentacleSwayLeft3 {
+  0%, 100% { transform: rotate(-14deg) translateX(0); }
+  50% { transform: rotate(-8deg) translateX(7px); }
+}
+
+@keyframes tentacleSwayRight1 {
+  0%, 100% { transform: rotate(-12deg) translateX(0); }
+  50% { transform: rotate(-18deg) translateX(-8px); }
+}
+
+@keyframes tentacleSwayRight3 {
+  0%, 100% { transform: rotate(16deg) translateX(0); }
+  50% { transform: rotate(10deg) translateX(-7px); }
+}
+
+/* =====================================
+   MOBILE
+   ===================================== */
+
+@media (max-width: 700px) {
+
+  .tentacle-cluster {
+    width: 180px;
+    height: 220px;
+  }
+
+  .tentacle-cluster-left {
+    top: 28%;
+    left: -35px;
+  }
+
+  .tentacle-cluster-right {
+    top: 26%;
+    right: -35px;
+  }
+
+  .tentacle {
+    width: 120px;
+    height: 16px;
+  }
+
+  .tentacle-left-2,
+  .tentacle-right-2 {
+    width: 145px;
+    height: 18px;
+  }
+
+  .tentacle-left-1,
+  .tentacle-right-1 {
+    width: 130px;
+  }
+
+  .tentacle-left-3,
+  .tentacle-right-3 {
+    width: 115px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .tentacle {
+    animation: none;
+  }
+
+  .corridor-presence {
+    transition: none;
+  }
+
+}
+
+
+/* =====================================
+   MOBILE
+   ===================================== */
+
+@media (max-width: 700px) {
+
+  .presence-corridor {
+    min-height: 360px;
+  }
+
+  .corridor-presence {
+    right: 2%;
+    top: 34%;
+
+    transform: scale(0.7);
+    transform-origin: top right;
+  }
+
+  .presence-content {
+    max-width: 85%;
+  }
+
+  .presence-message,
+  .presence-submessage {
+    font-size: 0.62rem;
+  }
+
+}
+
+
+/* =====================================
+   ELDRITCH TENTACLE EYES
+   ===================================== */
+
+.tentacle-eye {
+  position: absolute;
+
+  top: 5px;
+  left: 65%;
+
+  width: 15px;
+  height: 11px;
+
+  border-radius: 50%;
+
+  background: #080806;
+
+  border: 1px solid rgba(230, 194, 41, 0.45);
+
+  box-shadow:
+    0 0 6px rgba(230, 194, 41, 0.25),
+    inset 0 0 4px rgba(230, 194, 41, 0.2);
+
+  transform-origin: center;
+
+  animation:
+    tentacleEyeBlink 11s steps(1, end) infinite;
+}
+
+
+/* THE GLOWING IRIS */
+
+.tentacle-eye::before {
+  content: "";
+
+  position: absolute;
+
+  top: 2px;
+  left: 4px;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #050505 0%,
+      #050505 25%,
+      #ffd84a 30%,
+      #8f7815 100%
+    );
+
+  box-shadow:
+    0 0 5px rgba(255, 216, 74, 0.8),
+    0 0 12px rgba(230, 194, 41, 0.35);
+}
+
+
+/* =====================================
+   DIFFERENT EYE POSITIONS
+   ===================================== */
+
+/* Second eye on the longer tentacles */
+
+.tentacle-eye:nth-child(2) {
+  left: 35%;
+  top: 10px;
+
+  animation-delay: -5s;
+}
+
+/* Eyes on right-side tentacles */
+
+.tentacle-cluster-right
+.tentacle-eye {
+  left: 28%;
+}
+
+.tentacle-cluster-right
+.tentacle-eye:nth-child(2) {
+  left: 65%;
+}
+
+
+/* =====================================
+   ASYNCHRONOUS BLINKING
+   ===================================== */
+
+.tentacle-left-1 .tentacle-eye {
+  animation-delay: -2s;
+}
+
+.tentacle-left-3 .tentacle-eye {
+  animation-delay: -7s;
+}
+
+.tentacle-right-1 .tentacle-eye {
+  animation-delay: -4s;
+}
+
+.tentacle-right-3 .tentacle-eye {
+  animation-delay: -9s;
+}
+
+
+/* =====================================
+   EYE BLINK ANIMATION
+   ===================================== */
+
+@keyframes tentacleEyeBlink {
+
+  0%, 31%, 33%, 75%, 77%, 100% {
+    transform: scaleY(1);
+    opacity: 0.95;
+  }
+
+  32%, 76% {
+    transform: scaleY(0.08);
+    opacity: 0.3;
+  }
+
+}
+
+
+/* =====================================
+   UNNATURAL TENTACLE TWITCH
+   ===================================== */
+
+@keyframes eldritchTwitch {
+
+  0%, 100% {
+    transform:
+      rotate(4deg)
+      translateX(0);
+  }
+
+  30%, 65%, 69% {
+    transform:
+      rotate(-2deg)
+      translateX(-12px);
+  }
+
+  /* Sudden violent movements */
+
+  70% {
+    transform:
+      rotate(13deg)
+      translateX(-35px);
+  }
+
+  71% {
+    transform:
+      rotate(-12deg)
+      translateX(-7px);
+  }
+
+  72% {
+    transform:
+      rotate(6deg)
+      translateX(-28px);
+  }
+
+  /* Brief recovery */
+
+  73%, 75% {
+    transform:
+      rotate(-2deg)
+      translateX(-12px);
+  }
+
+  /* Final involuntary twitch */
+
+  76% {
+    transform:
+      rotate(-8deg)
+      translateX(-19px);
+  }
+
+  77% {
+    transform:
+      rotate(4deg)
+      translateX(-1px);
+  }
+
+}
+
+
+/* =====================================
+   REDUCED MOTION
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .tentacle-eye,
+  .tentacle-right-2 {
+    animation: none;
+  }
+
+}
+
+
+/* =====================================
+   CHAMBER CORNER LIGHTING
+   ===================================== */
+
+.chamber-lights {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1501;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* =====================================
+   SHARED CORNER LAMP
+   ===================================== */
+
+.chamber-lamp {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: min(65vw, 850px);
+  height: min(90vh, 850px);
+
+  opacity: 0.8;
+
+  pointer-events: none;
+}
+
+/* =====================================
+   LIGHT CONE
+   ===================================== */
+
+.chamber-lamp::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(255, 235, 155, 0.54) 0%,
+      rgba(230, 194, 41, 0.26) 22%,
+      rgba(230, 194, 41, 0.085) 52%,
+      transparent 80%
+    );
+
+  clip-path: polygon(
+    0% 0%,
+    13% 0%,
+    100% 100%,
+    0% 90%
+  );
+
+  filter: blur(12px);
+
+  mix-blend-mode: screen;
+}
+
+/* =====================================
+   METAL LIGHT HOUSING
+   ===================================== */
+
+.chamber-lamp::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 45px;
+  height: 20px;
+
+  background: #2c281b;
+
+  border: 1px solid var(--yellow-dark);
+
+  border-radius: 0 0 10px 0;
+
+  box-shadow:
+  0 0 14px rgba(230, 194, 41, 0.54),
+  0 0 36px rgba(230, 194, 41, 0.22);
+}
+
+/* =====================================
+   LEFT CORNER
+   ===================================== */
+
+.chamber-lamp-left {
+  left: 0;
+}
+
+/* =====================================
+   RIGHT CORNER
+   ===================================== */
+
+.chamber-lamp-right {
+  left: auto;
+  right: 0;
+
+  transform: scaleX(-1);
+}
+
+/* =====================================
+   MOBILE
+   ===================================== */
+
+@media (max-width: 700px) {
+
+  .chamber-lamp {
+    width: 72vw;
+    height: 65vh;
+  }
+
+  .chamber-lamp::after {
+    width: 30px;
+    height: 16px;
+  }
+
+}
+
+
+/* =====================================
+   PROTIFLO // POWER DETERIORATION
+   ===================================== */
+
+/*
+  Each lit chamber has two independent lamps.
+  Corridor lamps were intentionally removed.
+*/
+
+
+/* =====================================
+   01 - ABOUT
+   ===================================== */
+
+/* Stable. No animation. */
+
+
+/* =====================================
+   03 - EXPERIMENT ARCHIVE
+   ===================================== */
+
+.chamber-lights--archive .chamber-lamp {
+  animation:
+    chamberFlickerMild 9s steps(1, end) infinite;
+}
+
+
+/* =====================================
+   05 - INSTRUMENT CHAMBER
+   ===================================== */
+
+.chamber-lights--instruments .chamber-lamp {
+  animation:
+    chamberFlickerSevere 5s steps(1, end) infinite;
+}
+
+
+/* =====================================
+   07 - FINAL TRANSMISSION
+   ===================================== */
+
+/* Emergency electrical supply */
+
+.chamber-lights--contact .chamber-lamp {
+  animation:
+    chamberFlickerEmergency 6s steps(1, end) infinite;
+}
+
+
+/* =====================================
+   ASYNCHRONOUS LAMPS
+   ===================================== */
+
+/*
+  Left and right lamps must not
+  flicker at exactly the same moment.
+*/
+
+.chamber-lights--archive .chamber-lamp-right,
+.chamber-lights--instruments .chamber-lamp-right,
+.chamber-lights--contact .chamber-lamp-right {
+  animation-delay: -3.7s;
+}
+
+
+/* =====================================
+   MILD FLICKERING
+   ===================================== */
+
+@keyframes chamberFlickerMild {
+
+  0%, 61%, 64%, 100% {
+    opacity: 0.8;
+  }
+
+  62% {
+    opacity: 0.35;
+  }
+
+  63% {
+    opacity: 0.7;
+  }
+
+}
+
+
+/* =====================================
+   SEVERE FLICKERING
+   ===================================== */
+
+@keyframes chamberFlickerSevere {
+
+  0%, 29%, 33%, 70%, 74%, 100% {
+    opacity: 0.8;
+  }
+
+  30% {
+    opacity: 0.06;
+  }
+
+  31% {
+    opacity: 0.65;
+  }
+
+  32% {
+    opacity: 0.12;
+  }
+
+  71% {
+    opacity: 0.2;
+  }
+
+  72% {
+    opacity: 1;
+  }
+
+  73% {
+    opacity: 0.15;
+  }
+
+}
+
+
+/* =====================================
+   EMERGENCY POWER
+   ===================================== */
+
+@keyframes chamberFlickerEmergency {
+
+  0%, 30%, 35%, 75%, 80%, 100% {
+    opacity: 0.6;
+  }
+
+  31% {
+    opacity: 0.05;
+  }
+
+  32% {
+    opacity: 0.9;
+  }
+
+  33% {
+    opacity: 0.18;
+  }
+
+  34% {
+    opacity: 0.65;
+  }
+
+  76% {
+    opacity: 0.1;
+  }
+
+  77% {
+    opacity: 1;
+  }
+
+  78% {
+    opacity: 0.25;
+  }
+
+}
+
+
+/* =====================================
+   REDUCED MOTION
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .chamber-lights .chamber-lamp {
+    animation: none;
+    opacity: 0.8;
+  }
+
+  .chamber-lights--contact .chamber-lamp {
+    opacity: 0.6;
+  }
+
+}
+
+
+/* =====================================
+   UAV-008 // FLIGHT POSITIONING
+   ===================================== */
+
+/*
+  Only activates after the Hero.
+  The Hero and original navbar
+  remain unchanged.
+*/
+
+.portfolio:has(.cave-lighting.active) {
+  --uav-top: 125px;
+  --uav-beam-origin: 170px;
+}
+
+
+/* =====================================
+   DETACH WATCHER FROM NAVBAR
+   ===================================== */
+
+.portfolio:has(.cave-lighting.active)
+.navbar-watcher {
+  position: fixed;
+
+  top: var(--uav-top);
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  z-index: 2001;
+
+  animation:
+    uavFlight 4.5s ease-in-out infinite;
+}
+
+
+/* =====================================
+   REPOSITION THE SEARCHLIGHT
+   ===================================== */
+
+.portfolio:has(.cave-lighting.active)
+.light-beam {
+  top: var(--uav-beam-origin);
+
+  height: calc(
+    100vh - var(--uav-beam-origin)
+  );
+
+  /*
+    Keep the existing mouse-controlled
+    transform and rotation intact.
+  */
+
+  animation: none;
+}
+
+
+/* =====================================
+   ALIGN DARKNESS MASK
+   ===================================== */
+
+.portfolio:has(.cave-lighting.active)
+.cave-lighting {
+  --beam-origin: var(--uav-beam-origin);
+  /* Move the mask and its visible beam in sync with UAV-008. */
+  animation: uavFlight 4.5s ease-in-out infinite;
+}
+
+
+/* =====================================
+   HOVER ANIMATION
+   ===================================== */
+
+@keyframes uavFlight {
+
+  0%, 100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -5px;
+  }
+
+}
+
+
+/* =====================================
+   REDUCED MOTION
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .portfolio:has(.cave-lighting.active)
+  .navbar-watcher {
+    animation: none;
+  }
+
+}
+
+
+/* =====================================
+   UAV-008 // FLIGHT HARDWARE
+   ===================================== */
+
+.uav-hardware {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 230px;
+  height: 60px;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+}
+
+/* Visible only outside the Hero */
+
+.portfolio:has(.cave-lighting.active)
+.uav-hardware {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Keep the original eye above the arms */
+
+.portfolio:has(.cave-lighting.active)
+.watcher-housing {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =====================================
+   MECHANICAL ARMS
+   ===================================== */
+
+.uav-arm {
+  position: absolute;
+
+  top: 29px;
+
+  width: 70px;
+  height: 6px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #5a5234,
+      #171710 55%,
+      #080806
+    );
+
+  border: 1px solid #756324;
+  border-radius: 3px;
+
+  box-shadow:
+    0 0 8px rgba(230, 194, 41, 0.08);
+}
+
+.uav-arm-left {
+  right: calc(50% + 25px);
+
+  transform-origin: right center;
+  transform: rotate(-9deg);
+}
+
+.uav-arm-right {
+  left: calc(50% + 25px);
+
+  transform-origin: left center;
+  transform: rotate(9deg);
+}
+
+
+/* =====================================
+   ROTOR HOUSINGS
+   ===================================== */
+
+.uav-rotor {
+  position: absolute;
+
+  top: 26px;
+
+  width: 46px;
+  height: 25px;
+
+  border: 1px solid var(--yellow-dark);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      #29271a,
+      #0b0b08 75%
+    );
+
+  box-shadow:
+    0 0 10px rgba(230, 194, 41, 0.12);
+
+  z-index: 1;
+}
+
+.uav-rotor-left {
+  left: 0;
+}
+
+.uav-rotor-right {
+  right: 0;
+}
+
+
+/* =====================================
+   SPINNING ROTOR BLADES
+   ===================================== */
+
+.uav-rotor::before {
+  content: "";
+
+  position: absolute;
+
+  top: 10px;
+  left: 50%;
+
+  width: 56px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #8f7815 20%,
+      #e6c229 50%,
+      #8f7815 80%,
+      transparent
+    );
+
+  transform: translateX(-50%);
+
+  transform-origin: center;
+  will-change: transform;
+
+  animation:
+    uavRotorSpin 0.16s linear infinite;
+}
+
+/* Rotor center */
+
+.uav-rotor::after {
+  content: "";
+
+  position: absolute;
+
+  top: 7px;
+  left: 50%;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #6c5c27;
+  border: 1px solid var(--yellow);
+
+  transform: translateX(-50%);
+}
+
+
+/* =====================================
+   UAV STATUS LIGHT
+   ===================================== */
+
+.uav-indicator {
+  position: absolute;
+
+  top: 48px;
+  left: calc(50% - 4px);
+
+  width: 8px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #e35a50;
+
+  box-shadow:
+    0 0 8px rgba(227, 90, 80, 0.75),
+    0 0 15px rgba(227, 90, 80, 0.3);
+
+  animation:
+    uavStatusBlink 3s steps(1, end) infinite;
+}
+
+
+/* =====================================
+   ANIMATIONS
+   ===================================== */
+
+@keyframes uavRotorSpin {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes uavStatusBlink {
+  0%, 85%, 100% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.15;
+  }
+}
+
+
+/* =====================================
+   SMALL SCREENS
+   ===================================== */
+
+@media (max-width: 700px) {
+  .uav-hardware {
+    scale: 0.72;
+  }
+}
+
+
+/* =====================================
+   REDUCED MOTION
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .uav-rotor::before,
+  .uav-indicator {
+    animation: none;
+  }
+
+  .uav-hardware {
+    transition: none;
+  }
+}
+
+
+/* =====================================
+   REDUCED MOTION
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .portfolio:has(.cave-lighting.active)
+  .cave-lighting {
+    animation: none;
+  }
+
+}
+
+
+/* =====================================
+   EXPERIMENT CASE FILES
+   ===================================== */
+
+.experiment-case-file {
+  margin-top: 25px;
+  padding-top: 18px;
+
+  border-top: 1px solid var(--border);
+
+  font-family: "Courier New", monospace;
+}
+
+
+/* =====================================
+   CASE FILE TOGGLE
+   ===================================== */
+
+.experiment-case-file > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  list-style: none;
+  cursor: pointer;
+
+  color: var(--yellow);
+
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+
+  transition: color 0.25s ease;
+}
+
+.experiment-case-file > summary::-webkit-details-marker {
+  display: none;
+}
+
+.experiment-case-file > summary::after {
+  content: "+";
+
+  font-size: 1.3rem;
+}
+
+.experiment-case-file[open] > summary::after {
+  content: "−";
+}
+
+.experiment-case-file > summary:hover {
+  color: var(--yellow-bright);
+}
+
+.experiment-case-file > summary:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 5px;
+}
+
+
+/* =====================================
+   EXPANDED CONTENT
+   ===================================== */
+
+.case-file-content {
+  padding-top: 28px;
+}
+
+.case-file-section {
+  margin-bottom: 28px;
+}
+
+.case-file-section h4 {
+  margin: 0 0 14px;
+
+  color: var(--yellow);
+
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.case-file-section p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.8rem;
+  line-height: 1.9;
+}
+
+
+/* =====================================
+   FEATURES LIST
+   ===================================== */
+
+.case-file-list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.case-file-list li {
+  position: relative;
+
+  padding: 8px 0 8px 18px;
+
+  color: var(--text-muted);
+
+  font-size: 0.78rem;
+  line-height: 1.8;
+}
+
+.case-file-list li::before {
+  content: ">";
+
+  position: absolute;
+  left: 0;
+
+  color: var(--yellow-dark);
+}
+
+
+/* =====================================
+   PROJECT LINKS
+   ===================================== */
+
+.case-file-link {
+  display: inline-block;
+
+  max-width: 100%;
+  padding: 12px 14px;
+
+  color: var(--yellow);
+
+  background: rgba(230, 194, 41, 0.04);
+
+  border: 1px solid var(--yellow-dark);
+
+  font-size: 0.68rem;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.case-file-link:hover {
+  background: rgba(230, 194, 41, 0.1);
+  border-color: var(--yellow);
+}
+
+.case-file-link:focus-visible {
+  outline: 2px solid var(--yellow-bright);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experiment-case-file > summary,
+  .case-file-link {
+    transition: none;
+  }
+}
+
+/* =====================================
+   EXPERIMENT ARCHIVE // VISUAL RECORDS
+   Replaces the older CSS-drawn illustrations.
+   Artwork is inline SVG, matching the preview.
+   ===================================== */
+
+.visual-record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin: 18px 0 10px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(230, 194, 41, .14);
+  font-family: "Courier New", monospace;
+}
+
+.visual-record-id {
+  color: var(--yellow);
+  font-size: .59rem;
+  letter-spacing: .12em;
+}
+
+.visual-record-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-muted);
+  font-size: .55rem;
+  letter-spacing: .08em;
+  transition: color .25s ease;
+}
+
+.visual-record-status::before {
+  content: "";
+  flex: 0 0 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: 0 0 7px rgba(230, 194, 41, .4);
+  transition: background .25s ease, box-shadow .25s ease;
+}
+
+.experiment-card:hover .visual-record-status,
+.experiment-card:focus-within .visual-record-status {
+  color: #e35a50;
+}
+
+.experiment-card:hover .visual-record-status::before,
+.experiment-card:focus-within .visual-record-status::before {
+  background: #e35a50;
+  box-shadow: 0 0 8px rgba(227, 90, 80, .6);
+}
+
+.experiment-visual {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: 100%;
+  height: 150px;
+  margin: 0 0 18px;
+  overflow: hidden;
+  background: #080806;
+  border: 1px solid rgba(230, 194, 41, .17);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, .54);
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+
+.visual-protiflo {
+  background: radial-gradient(circle at 50% 30%, rgba(230, 194, 41, .045), transparent 55%), #080806;
+}
+
+.visual-student-api {
+  background: radial-gradient(circle at 50% 50%, rgba(230, 194, 41, .045), transparent 62%), #080806;
+}
+
+.visual-mythos {
+  background: linear-gradient(180deg, #090907 0%, #0d0906 65%, #080705 100%);
+}
+
+.experiment-visual .archive-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.experiment-visual .visual-scan {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .15;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 4px,
+    rgba(0, 0, 0, .16) 5px
+  );
+}
+
+.experiment-card:hover .experiment-visual,
+.experiment-card:focus-within .experiment-visual {
+  border-color: rgba(230, 194, 41, .4);
+  box-shadow: 0 0 16px rgba(230, 194, 41, .05), inset 0 0 35px rgba(0, 0, 0, .6);
+}
+
+/* The old 45px heading margin created the large, empty-looking gap. */
+.experiment-card > .experiment-visual + h3 {
+  margin-top: 20px;
+  margin-bottom: 18px;
+}
+
+/* Only project art moves subtly; never animate the UAV's real beam. */
+.experiment-card:hover .archive-art,
+.experiment-card:focus-within .archive-art {
+  filter: brightness(1.13);
+}
+
+@media (max-width: 700px) {
+  .experiment-visual { height: 138px; }
+  .visual-record-header { margin-top: 16px; }
+  .visual-record-id,
+  .visual-record-status { font-size: .53rem; }
+  .experiment-card > .experiment-visual + h3 { margin-top: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visual-record-status,
+  .visual-record-status::before,
+  .experiment-visual { transition: none; }
+}
+
+
+/* =========================================================
+   PROTIFLO // MOBILE & TABLET RESPONSIVENESS
+   Appended overrides: existing desktop styles remain intact.
+   ========================================================= */
+
+/* Fluid, contained content on tablets */
+@media (max-width: 1000px) {
+  .about,
+  .projects,
+  .instruments {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .transmission {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .system-content,
+  .system-grid,
+  .experiment-grid,
+  .instrument-grid {
+    min-width: 0;
+  }
+
+  .experiment-card,
+  .instrument-panel,
+  .transmission-terminal {
+    min-width: 0;
+  }
+
+  .experiment-visual .archive-art {
+    max-width: 100%;
+  }
+}
+
+/* Smaller tablets: two columns, comfortable spacing */
+@media (min-width: 601px) and (max-width: 850px) {
+  .nav-links { gap: 1.25rem; }
+
+  .hero h1 {
+    font-size: clamp(5rem, 12vw, 7.5rem);
+  }
+
+  .experiment-card { padding: 20px; }
+  .instrument-panel { padding: 22px; }
+
+  .experiment-card > .experiment-visual + h3 {
+    font-size: 1.3rem;
+  }
+
+  .visual-record-id,
+  .visual-record-status {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* =====================================
+   PHONES // 600px AND BELOW
+   ===================================== */
+@media (max-width: 600px) {
+  /* Two-level navbar: brand/UAV above, tap-friendly navigation below */
+  .portfolio {
+    --nav-height: 108px;
+    --beam-origin: 94px;
+  }
+
+  .navbar {
+    height: var(--nav-height);
+    padding: 0 14px;
+  }
+
+  .logo {
+    top: 23px;
+    left: 14px;
+    font-size: .93rem;
+    letter-spacing: .15em;
+    transform: none;
+  }
+
+  .navbar-watcher {
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%) scale(.88);
+  }
+
+  .nav-monitor { display: none; }
+
+  .nav-links {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+    width: 100%;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 0;
+    transform: none;
+    border-top: 1px solid var(--border);
+    background: rgba(8, 8, 6, .97);
+  }
+
+  .nav-links a {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 6px;
+    font-size: .78rem;
+  }
+
+  .nav-links a:focus-visible {
+    outline: 2px solid var(--yellow-bright);
+    outline-offset: -3px;
+  }
+
+  /* Preserve the original 55x35 Hero eyes. Only text and spacing adapt. */
+  .hero {
+    min-height: 100svh;
+    padding: calc(var(--nav-height) + 34px) 18px 48px;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.45rem, 16vw, 4.8rem);
+    letter-spacing: .015em;
+    line-height: 1.02;
+    overflow-wrap: normal;
+  }
+
+  .eyebrow {
+    font-size: .64rem;
+    letter-spacing: .19em;
+  }
+
+  .hero-actions {
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .hero-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 265px);
+    min-height: 44px;
+    text-align: center;
+  }
+
+  /* Keep eye dimensions fixed; tuck perimeter eyes away from text. */
+  .eye-left-1  { left: -25px; }
+  .eye-left-2  { left: -30px; }
+  .eye-left-3  { left: -25px; }
+  .eye-left-4  { left: -30px; }
+  .eye-right-1 { right: -25px; }
+  .eye-right-2 { right: -30px; }
+  .eye-right-3 { right: -25px; }
+
+  /* Floating drone and beam stay beneath the taller phone navbar */
+  .portfolio:has(.cave-lighting.active) {
+    --uav-top: calc(var(--nav-height) + 24px);
+    --uav-beam-origin: calc(var(--nav-height) + 67px);
+  }
+
+  .portfolio:has(.cave-lighting.active) .navbar-watcher {
+    transform: translateX(-50%) scale(.85);
+  }
+
+  .portfolio:has(.cave-lighting.active) .light-beam {
+    width: 58vw;
+    filter: blur(8px);
+  }
+
+  /* Prevent anchor targets hiding behind the sticky header */
+  #about, #projects, #stack, #contact {
+    scroll-margin-top: var(--nav-height);
+  }
+
+  /* Room content, typography and layout */
+  .about, .projects, .instruments {
+    padding: 92px 6% 80px;
+  }
+
+  .transmission {
+    padding: 96px 6% 80px;
+  }
+
+  .system-header {
+    padding: 15px;
+    font-size: .66rem;
+    letter-spacing: .06em;
+    overflow-wrap: anywhere;
+  }
+
+  .system-content { width: 100%; }
+  .system-grid { gap: 18px; margin-top: 34px; }
+  .capabilities, .observation { padding: 20px; }
+  .observation p:not(.system-title) { font-size: .85rem; }
+  .objective { font-size: 1.6rem; }
+  .warning { margin-top: 42px; padding: 18px; overflow-wrap: anywhere; }
+
+  .projects h2,
+  .instruments-header h2,
+  .transmission-header h2 {
+    font-size: clamp(2rem, 8.6vw, 3rem);
+    overflow-wrap: anywhere;
+  }
+
+  .archive-description,
+  .instruments-header > p:not(.instrument-label),
+  .transmission-header > p:not(.transmission-label) {
+    font-size: .86rem;
+    line-height: 1.7;
+  }
+
+  .projects-header, .instruments-header, .transmission-header {
+    margin-bottom: 36px;
+  }
+
+  .experiment-grid, .instrument-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .experiment-card {
+    padding: 20px;
+  }
+
+  .experiment-card > .experiment-visual + h3 {
+    margin: 16px 0 12px;
+    font-size: 1.35rem;
+  }
+
+  .experiment-card > p {
+    min-height: 0;
+    font-size: .84rem;
+  }
+
+  .experiment-visual {
+    height: clamp(125px, 42vw, 170px);
+  }
+
+  .visual-record-header {
+    gap: 6px 9px;
+  }
+
+  .visual-record-id, .visual-record-status {
+    font-size: .57rem;
+    letter-spacing: .045em;
+    overflow-wrap: anywhere;
+  }
+
+  .experiment-case-file > summary,
+  .case-file-link {
+    min-height: 44px;
+  }
+
+  .experiment-case-file > summary {
+    align-items: center;
+    padding: 8px 0;
+  }
+
+  .case-file-link {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: 0 0 10px;
+    overflow-wrap: anywhere;
+  }
+
+  .experiment-tech span { padding: 7px 9px; }
+  .instrument-panel { padding: 23px; }
+
+  .terminal-header,
+  .transmission-terminal-header,
+  .transmission-footer {
+    flex-wrap: wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .terminal-header { font-size: .63rem; }
+  .terminal-screen p, .terminal-final { overflow-wrap: anywhere; }
+  .transmission-log { min-height: 0; }
+  .transmission-boot-button { min-height: 44px; max-width: 100%; }
+  .transmission-button { min-height: 48px; overflow-wrap: anywhere; }
+
+  /* Whispers sit on opposite sides of a readable vertical passage */
+  .cave-wall { height: 630px; }
+
+  .cave-whisper {
+    width: 86%;
+    max-width: 300px;
+  }
+
+  .cave-whisper-left {
+    top: 34px;
+    left: 7%;
+    right: auto;
+    transform: none;
+  }
+
+  .cave-whisper-right {
+    top: 262px;
+    right: 7%;
+    left: auto;
+    transform: none;
+  }
+
+  .cave-whisper .whisper-copy { font-size: .76rem; }
+
+  .eighth-record {
+    top: 420px;
+    width: 88%;
+    max-width: 320px;
+    padding: 15px;
+    z-index: 4;
+  }
+
+  /* Full-size corridor wrapper: scale only creatures, not the entire corridor */
+  .corridor-presence {
+    inset: 0;
+    top: 0;
+    right: 0;
+    transform: none;
+  }
+
+  .tentacle-cluster {
+    scale: .78;
+  }
+
+  .tentacle-cluster-left { left: -38px; }
+  .tentacle-cluster-right { right: -38px; }
+
+  .presence-content { max-width: 90%; }
+  .presence-content h2 { font-size: 1.2rem; }
+  .presence-message, .presence-submessage { line-height: 1.6; }
+
+  .fractured-passage, .descent-shaft {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 3.35rem; }
+  .eyebrow { font-size: .58rem; letter-spacing: .15em; }
+  .experiment-card { padding: 16px; }
+  .visual-record-id, .visual-record-status { font-size: .52rem; }
+  .transmission-terminal-header { gap: 10px; }
+}
+
+/* =====================================
+   TOUCH INPUT / NO HOVER CURSOR
+   ===================================== */
+.mobile-archive-hint { display: none; }
+
+@media (hover: none) and (pointer: coarse) {
+  /* Don't darken unreadable areas when the visitor cannot aim a mouse. */
+  .portfolio {
+    --cave-darkness: .18;
+    --beam-opacity: .24;
+  }
+
+  .mobile-archive-hint {
+    display: block;
+    margin: -12px 0 22px;
+    color: var(--yellow-dark);
+    font: .69rem/1.6 "Courier New", monospace;
+    letter-spacing: .04em;
+  }
+
+  /* A focused card can reveal its fragment without mouse illumination. */
+  .experiment-card:focus .experiment-secret,
+  .experiment-card:focus-within .experiment-secret {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Whispers show a tappable record label; touch reveals the message. */
+  .cave-whisper {
+    opacity: 1;
+    min-height: 105px;
+    outline: 0;
+    cursor: pointer;
+  }
+
+  .cave-whisper .whisper-copy { opacity: 0; transition: opacity .25s ease; }
+
+  .cave-whisper::after {
+    content: "> TAP TO DECODE_";
+    display: block;
+    margin-top: 12px;
+    color: var(--yellow-dark);
+    font-size: .7rem;
+    letter-spacing: .08em;
+  }
+
+  .cave-whisper:focus p,
+  .cave-whisper.is-illuminated p { opacity: 1; }
+
+  .cave-whisper:focus::after,
+  .cave-whisper.is-illuminated::after { display: none; }
+
+  .cave-whisper:focus {
+    outline: 1px dashed var(--yellow-dark);
+    outline-offset: 8px;
+  }
+
+  .cave-wall:has(.cave-whisper-right:focus) .eighth-record {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+
+  .instrument-panel-archive:focus .instrument-terminal,
+  .instrument-panel-archive:focus-within .instrument-terminal {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .instrument-panel-archive:focus,
+  .instrument-panel-archive:focus-within {
+    border-color: var(--yellow);
+  }
+}
+
+/* Avoid unnecessary movement when the user requests reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .chamber-lights .chamber-lamp,
+  .tentacle-cluster .tentacle,
+  .tentacle-eye,
+  .navbar-watcher,
+  .cave-lighting {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY // KEYBOARD, TOUCH, REDUCED MOTION
+   Appended after existing breakpoints; desktop visuals remain unchanged.
+   ========================================================= */
+
+/* Hidden headings/instructions stay available to assistive technology. */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 12px;
+  z-index: 5000;
+  padding: 12px 18px;
+  transform: translateY(-180%);
+  color: #080806;
+  background: var(--yellow-bright);
+  border: 2px solid #080806;
+  font: bold 0.85rem/1.3 'Courier New', monospace;
+  text-decoration: none;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+#main-content:focus { outline: none; }
+.transmission-terminal:focus { outline: 2px solid var(--yellow-bright); outline-offset: 3px; }
+
+/* Visible focus for navigable items, including non-interactive card focus. */
+.portfolio :where(a, button, summary, [tabindex="0"]):focus-visible {
+  outline: 2px solid var(--yellow-bright);
+  outline-offset: 4px;
+}
+.portfolio .experiment-card:focus-visible,
+.portfolio .instrument-panel-archive:focus-visible {
+  outline-offset: -4px;
+}
+
+/* Deliberate, persistent reveal: optional pinning alongside light and focus. */
+.experiment-card:focus-within .experiment-secret,
+.experiment-card.is-pinned .experiment-secret { opacity: 1; transform: translateY(0); }
+.experiment-pin-button, .archive-access-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 5px 0;
+  margin-top: 16px;
+  border: 0;
+  background: transparent;
+  font: 0.68rem/1.5 'Courier New', monospace;
+  letter-spacing: .06em;
+  color: var(--yellow-dark);
+  text-align: left;
+  cursor: pointer;
+}
+.experiment-pin-button:hover, .experiment-pin-button[aria-pressed="true"],
+.archive-access-button:hover, .archive-access-button[aria-pressed="true"] { color: var(--yellow-bright); }
+.experiment-card.is-pinned { border-color: var(--yellow-dark); }
+
+/* Whisper buttons use plain text styling, not browser button chrome. */
+.cave-whisper {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.cave-whisper .whisper-copy { display: block; }
+.cave-whisper.is-decoded { opacity: 1; }
+.cave-whisper:focus .whisper-copy,
+.cave-whisper:focus-visible .whisper-copy,
+.cave-whisper.is-illuminated .whisper-copy,
+.cave-whisper.is-decoded .whisper-copy { opacity: 1; }
+.cave-wall:has(.cave-whisper-right.is-decoded) .eighth-record {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+/* Preserve the narrative Watcher reaction when a reader decodes the record. */
+.portfolio:has(.cave-whisper-right.is-decoded) .watcher-housing {
+  border-color: #e35a50;
+  box-shadow: 0 0 18px rgba(227, 90, 80, 0.6), inset 0 0 15px rgba(227, 90, 80, .25);
+}
+.portfolio:has(.cave-whisper-right.is-decoded) .watcher-pupil { background: #e35a50; }
+.portfolio:has(.cave-whisper-right.is-decoded) .watcher-glow { background: #e35a50; }
+
+/* A real button lets touch and keyboard users activate the Archive. */
+.instrument-panel-archive:focus-within .instrument-terminal,
+.instrument-panel-archive.is-archive-pinned .instrument-terminal {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.instrument-panel-archive:focus-within,
+.instrument-panel-archive.is-archive-pinned { border-color: var(--yellow); }
+.archive-access-button { position: relative; z-index: 1; }
+
+/* On touch devices an explicitly decoded transmission stays readable. */
+@media (hover: none) and (pointer: coarse) {
+  .cave-whisper:focus .whisper-copy,
+.cave-whisper:focus-visible .whisper-copy,
+.cave-whisper.is-illuminated .whisper-copy,
+.cave-whisper.is-decoded .whisper-copy { opacity: 1; }
+  .cave-whisper.is-decoded::after { display: none; }
+  .experiment-pin-button, .archive-access-button { min-height: 44px; }
+}
+
+/* One consistent setting applies to animations from every chamber. */
+@media (prefers-reduced-motion: reduce) {
+  .portfolio, .portfolio *, .portfolio *::before, .portfolio *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+
+/* =========================================================
+   PROTIFLO // THE AWAKENING SIGIL
+   Integrated into the existing navbar. Scroll depth controls
+   its glow; the eye begins a slow pulse at UNKNOWN signal.
+   ========================================================= */
+
+.logo.logo-sigil {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  max-width: 190px;
+}
+
+.logo-sigil-mark {
+  position: relative;
+  display: block;
+  flex: 0 0 58px;
+  width: 58px;
+  height: 46px;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+}
+
+.logo-sigil-mark img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  opacity: var(--sigil-opacity, .55);
+  filter:
+    brightness(var(--sigil-brightness, .75))
+    drop-shadow(0 0 var(--sigil-glow, 1px) rgba(230, 194, 41, .7));
+  /* Blend the artwork's nearly-black backdrop into the navbar. */
+  mix-blend-mode: screen;
+  transition: opacity .2s linear, filter .2s linear;
+}
+
+/* The vertical eye sits in the lower diamond, not the top one. */
+.logo-sigil-mark::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 6px;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #ffe5a2;
+  box-shadow: 0 0 var(--sigil-glow, 1px) rgba(255, 197, 45, .95);
+  opacity: var(--sigil-eye-opacity, .05);
+  pointer-events: none;
+}
+
+.logo-sigil-word {
+  white-space: nowrap;
+}
+
+.logo-sigil.sigil-awake .logo-sigil-mark {
+  animation: sigilHeartbeat 4.5s ease-in-out infinite;
+}
+
+@keyframes sigilHeartbeat {
+  0%, 100% { transform: scale(1); }
+  44% { transform: scale(1.055); }
+  52% { transform: scale(1.025); }
+  65% { transform: scale(1.06); }
+}
+
+@media (max-width: 850px) {
+  .logo.logo-sigil { gap: 6px; }
+  .logo-sigil-mark { flex-basis: 52px; width: 52px; height: 41px; }
+}
+
+@media (max-width: 600px) {
+  /* A compact single mark stays clear of the hovering UAV on phones. */
+  .logo.logo-sigil { top: 11px; left: 12px; transform: none; }
+  .logo-sigil-mark { flex-basis: 52px; width: 52px; height: 41px; }
+  .logo-sigil-word { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-sigil.sigil-awake .logo-sigil-mark { animation: none; }
+}

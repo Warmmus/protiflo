@@ -1,344 +1,967 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="portfolio">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<style>
-  :host {
-    --bright-blue: oklch(51.01% 0.274 263.83);
-    --electric-violet: oklch(53.18% 0.28 296.97);
-    --french-violet: oklch(47.66% 0.246 305.88);
-    --vivid-pink: oklch(69.02% 0.277 332.77);
-    --hot-red: oklch(61.42% 0.238 15.34);
-    --orange-red: oklch(63.32% 0.24 31.68);
-
-    --gray-900: oklch(19.37% 0.006 300.98);
-    --gray-700: oklch(36.98% 0.014 302.71);
-    --gray-400: oklch(70.9% 0.015 304.04);
-
-    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
-      180deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
-
-    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
-      90deg,
-      var(--orange-red) 0%,
-      var(--vivid-pink) 50%,
-      var(--electric-violet) 100%
-    );
-
-    --pill-accent: var(--bright-blue);
-
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: block;
-    height: 100dvh;
-  }
-
-  h1 {
-    font-size: 3.125rem;
-    color: var(--gray-900);
-    font-weight: 500;
-    line-height: 100%;
-    letter-spacing: -0.125rem;
-    margin: 0;
-    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-  }
-
-  p {
-    margin: 0;
-    color: var(--gray-700);
-  }
-
-  main {
-    width: 100%;
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: inherit;
-    position: relative;
-  }
-
-  .angular-logo {
-    max-width: 9.2rem;
-  }
-
-  .content {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    max-width: 700px;
-    margin-bottom: 3rem;
-  }
-
-  .content h1 {
-    margin-top: 1.75rem;
-  }
-
-  .content p {
-    margin-top: 1.5rem;
-  }
-
-  .divider {
-    width: 1px;
-    background: var(--red-to-pink-to-purple-vertical-gradient);
-    margin-inline: 0.5rem;
-  }
-
-  .pill-group {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-  }
-
-  .pill {
-    display: flex;
-    align-items: center;
-    --pill-accent: var(--bright-blue);
-    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
-    color: var(--pill-accent);
-    padding-inline: 0.75rem;
-    padding-block: 0.375rem;
-    border-radius: 2.75rem;
-    border: 0;
-    transition: background 0.3s ease;
-    font-family: var(--inter-font);
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.4rem;
-    letter-spacing: -0.00875rem;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .pill:hover {
-    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
-  }
-
-  .pill-group .pill:nth-child(6n + 1) {
-    --pill-accent: var(--bright-blue);
-  }
-  .pill-group .pill:nth-child(6n + 2) {
-    --pill-accent: var(--electric-violet);
-  }
-  .pill-group .pill:nth-child(6n + 3) {
-    --pill-accent: var(--french-violet);
-  }
-
-  .pill-group .pill:nth-child(6n + 4),
-  .pill-group .pill:nth-child(6n + 5),
-  .pill-group .pill:nth-child(6n + 6) {
-    --pill-accent: var(--hot-red);
-  }
-
-  .pill-group svg {
-    margin-inline-start: 0.25rem;
-  }
-
-  .social-links {
-    display: flex;
-    align-items: center;
-    gap: 0.73rem;
-    margin-top: 1.5rem;
-  }
-
-  .social-links path {
-    transition: fill 0.3s ease;
-    fill: var(--gray-400);
-  }
-
-  .social-links a:hover svg path {
-    fill: var(--gray-900);
-  }
-
-  @media screen and (max-width: 650px) {
-    .content {
-      flex-direction: column;
-      width: max-content;
-    }
-
-    .divider {
-      height: 1px;
-      width: 100%;
-      background: var(--red-to-pink-to-purple-horizontal-gradient);
-      margin-block: 1.5rem;
-    }
-  }
-</style>
-
-<main class="main">
-  <div class="content">
-    <div class="left-side">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 982 239"
-        fill="none"
-        class="angular-logo"
-      >
-        <g clip-path="url(#a)">
-          <path
-            fill="url(#b)"
-            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
-          />
-          <path
-            fill="url(#c)"
-            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"
-          />
-        </g>
-        <defs>
-          <radialGradient
-            id="c"
-            cx="0"
-            cy="0"
-            r="1"
-            gradientTransform="rotate(118.122 171.182 60.81) scale(205.794)"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stop-color="#FF41F8" />
-            <stop offset=".707" stop-color="#FF41F8" stop-opacity=".5" />
-            <stop offset="1" stop-color="#FF41F8" stop-opacity="0" />
-          </radialGradient>
-          <linearGradient
-            id="b"
-            x1="0"
-            x2="982"
-            y1="192"
-            y2="192"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stop-color="#F0060B" />
-            <stop offset="0" stop-color="#F0070C" />
-            <stop offset=".526" stop-color="#CC26D5" />
-            <stop offset="1" stop-color="#7702FF" />
-          </linearGradient>
-          <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
-        </defs>
-      </svg>
-      <h1>Hello, {{ title() }}</h1>
-      <p>Congratulations! Your app is running. 🎉</p>
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Primary navigation">
+    <!-- BRAND -->
+    <!-- THE AWAKENING SIGIL // BRIGHTENS WITH DEPTH -->
+    <a
+      class="logo logo-sigil"
+      href="/"
+      [class.sigil-awake]="signal === 'UNKNOWN'"
+      aria-label="Muaath — return to home"
+    >
+      <span class="logo-sigil-mark" aria-hidden="true">
+        <img src="/protiflo-sigil.png" alt="" width="58" height="46" decoding="async" />
+      </span>
+    </a>
+    <!-- SIGNAL: LEFT OF WATCHER -->
+    <div class="nav-monitor nav-monitor-signal">
+      <span class="signal-display" [attr.data-signal]="signal" [attr.data-text]="'SIGNAL: ' + signal">
+        SIGNAL: {{ signal }}
+      </span>
     </div>
-    <div class="divider" role="separator" aria-label="Divider"></div>
-    <div class="right-side">
-      <div class="pill-group">
-        @for (item of [
-          { title: 'Explore the Docs', link: 'https://angular.dev' },
-          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
-          { title: 'Prompt and best practices for AI', link: 'https://angular.dev/ai/develop-with-ai'},
-          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
-          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
-          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
-        ]; track item.title) {
-          <a
-            class="pill"
-            [href]="item.link"
-            target="_blank"
-            rel="noopener"
-          >
-            <span>{{ item.title }}</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="14"
-              viewBox="0 -960 960 960"
-              width="14"
-              fill="currentColor"
-            >
-              <path
-                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
-              />
-            </svg>
-          </a>
-        }
+    <!-- CENTER WATCHER -->
+    <div class="navbar-watcher" aria-hidden="true">
+      <!-- UAV-008 // FLIGHT HARDWARE -->
+      <div class="uav-hardware">
+        <!-- MECHANICAL ARMS -->
+        <span class="uav-arm uav-arm-left"></span>
+        <span class="uav-arm uav-arm-right"></span>
+        <!-- ROTORS -->
+        <span class="uav-rotor uav-rotor-left"></span>
+        <span class="uav-rotor uav-rotor-right"></span>
+        <!-- STATUS INDICATOR -->
+        <span class="uav-indicator"></span>
       </div>
-      <div class="social-links">
-        <a
-          href="https://github.com/angular/angular"
-          aria-label="Github"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="25"
-            height="24"
-            viewBox="0 0 25 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="Github"
-          >
-            <path
-              d="M12.3047 0C5.50634 0 0 5.50942 0 12.3047C0 17.7423 3.52529 22.3535 8.41332 23.9787C9.02856 24.0946 9.25414 23.7142 9.25414 23.3871C9.25414 23.0949 9.24389 22.3207 9.23876 21.2953C5.81601 22.0377 5.09414 19.6444 5.09414 19.6444C4.53427 18.2243 3.72524 17.8449 3.72524 17.8449C2.61064 17.082 3.81137 17.0973 3.81137 17.0973C5.04697 17.1835 5.69604 18.3647 5.69604 18.3647C6.79321 20.2463 8.57636 19.7029 9.27978 19.3881C9.39052 18.5924 9.70736 18.0499 10.0591 17.7423C7.32641 17.4347 4.45429 16.3765 4.45429 11.6618C4.45429 10.3185 4.9311 9.22133 5.72065 8.36C5.58222 8.04931 5.16694 6.79833 5.82831 5.10337C5.82831 5.10337 6.85883 4.77319 9.2121 6.36459C10.1965 6.09082 11.2424 5.95546 12.2883 5.94931C13.3342 5.95546 14.3801 6.09082 15.3644 6.36459C17.7023 4.77319 18.7328 5.10337 18.7328 5.10337C19.3942 6.79833 18.9789 8.04931 18.8559 8.36C19.6403 9.22133 20.1171 10.3185 20.1171 11.6618C20.1171 16.3888 17.2409 17.4296 14.5031 17.7321C14.9338 18.1012 15.3337 18.8559 15.3337 20.0084C15.3337 21.6552 15.3183 22.978 15.3183 23.3779C15.3183 23.7009 15.5336 24.0854 16.1642 23.9623C21.0871 22.3484 24.6094 17.7341 24.6094 12.3047C24.6094 5.50942 19.0999 0 12.3047 0Z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://x.com/angular"
-          aria-label="X"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="X"
-          >
-            <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw"
-          aria-label="Youtube"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="29"
-            height="20"
-            viewBox="0 0 29 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            alt="Youtube"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M27.4896 1.52422C27.9301 1.96749 28.2463 2.51866 28.4068 3.12258C29.0004 5.35161 29.0004 10 29.0004 10C29.0004 10 29.0004 14.6484 28.4068 16.8774C28.2463 17.4813 27.9301 18.0325 27.4896 18.4758C27.0492 18.9191 26.5 19.2389 25.8972 19.4032C23.6778 20 14.8068 20 14.8068 20C14.8068 20 5.93586 20 3.71651 19.4032C3.11363 19.2389 2.56449 18.9191 2.12405 18.4758C1.68361 18.0325 1.36732 17.4813 1.20683 16.8774C0.613281 14.6484 0.613281 10 0.613281 10C0.613281 10 0.613281 5.35161 1.20683 3.12258C1.36732 2.51866 1.68361 1.96749 2.12405 1.52422C2.56449 1.08095 3.11363 0.76113 3.71651 0.596774C5.93586 0 14.8068 0 14.8068 0C14.8068 0 23.6778 0 25.8972 0.596774C26.5 0.76113 27.0492 1.08095 27.4896 1.52422ZM19.3229 10L11.9036 5.77905V14.221L19.3229 10Z"
-            />
-          </svg>
-        </a>
+      <div class="watcher-glow"></div>
+      <div class="watcher-housing">
+        <div class="watcher-eye">
+          <div class="watcher-iris">
+            <div class="watcher-pupil"></div>
+          </div>
+        </div>
       </div>
+    </div>
+    <!-- DEPTH: RIGHT OF WATCHER -->
+    <div class="nav-monitor nav-monitor-depth">
+      <span class="depth-display">
+        DEPTH: {{ depthDisplay }}m
+      </span>
+    </div>
+    <!-- NAVIGATION -->
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+  <!-- CAVE LIGHTING -->
+  <div class="cave-lighting" aria-hidden="true">
+    <div class="light-beam">
+      <span class="beam-point beam-point-start"></span>
+      <span class="beam-point beam-point-end"></span>
     </div>
   </div>
-</main>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+  <main id="main-content" tabindex="-1">
+  <!-- HERO SECTION -->
+  <section class="hero" aria-labelledby="hero-title">
+    <!-- LEFT EYES -->
+    <div aria-hidden="true" class="eye-position eye-left-1">
+      <app-eye></app-eye>
+    </div>
+    <div aria-hidden="true" class="eye-position eye-left-2">
+      <app-eye></app-eye>
+    </div>
+    <div aria-hidden="true" class="eye-position eye-left-3">
+      <app-eye></app-eye>
+    </div>
+    <div aria-hidden="true" class="eye-position eye-left-4">
+      <app-eye></app-eye>
+    </div>
+    <!-- RIGHT EYES -->
+    <div aria-hidden="true" class="eye-position eye-right-1">
+      <app-eye></app-eye>
+    </div>
+    <div aria-hidden="true" class="eye-position eye-right-2">
+      <app-eye></app-eye>
+    </div>
+    <div aria-hidden="true" class="eye-position eye-right-3">
+      <app-eye></app-eye>
+    </div>
+    <!-- HERO CONTENT -->
+    <div class="hero-content">
+      <p class="eyebrow">
+        FULL-STACK DEVELOPER
+      </p>
+      <h1 id="hero-title">MUAATH</h1>
+      <div class="hero-actions">
+        <a class="primary-button" href="#projects">
+          View My Work
+        </a>
+        <a class="secondary-button" aria-label="Muaath on GitHub, opens in a new tab" href="https://github.com/Warmmus" target="_blank" rel="noopener noreferrer">
+          GitHub ↗
+        </a>
+      </div>
+    </div>
+  </section>
 
+  <!-- ABOUT: CORRUPTED SYSTEM FILE -->
+  <section id="about" class="about" aria-labelledby="about-title">
+    <h2 id="about-title" class="sr-only">About Muaath</h2>
+    <!-- CORNER FLOODLIGHT SYSTEM -->
+    <div class="chamber-lights" aria-hidden="true">
+      <div class="chamber-lamp chamber-lamp-left"></div>
+      <div class="chamber-lamp chamber-lamp-right"></div>
+    </div>
+    <!-- SYSTEM HEADER -->
+    <div class="system-header">
+      <span>SYSTEM // SUBJECT_DATABASE</span>
+      <span>STATUS: PARTIALLY CORRUPTED</span>
+    </div>
+    <!-- SYSTEM CONTENT -->
+    <div class="system-content">
+      <p class="system-line">
+        &gt; ACCESSING SUBJECT...
+      </p>
+      <!-- SUBJECT INFORMATION -->
+      <div class="subject-info">
+        <p>
+          <span>SUBJECT:</span> MUAATH
+        </p>
+        <p>
+          <span>CLASS:</span> FULL-STACK DEVELOPER
+        </p>
+        <p>
+          <span>STATUS:</span> ACTIVE
+        </p>
+      </div>
+      <!-- CAPABILITIES / OBSERVATION -->
+      <div class="system-grid">
+        <div class="capabilities">
+          <p class="system-title">
+            &gt; KNOWN CAPABILITIES
+          </p>
+          <p>JAVA</p>
+          <p>SPRING BOOT</p>
+          <p>ANGULAR</p>
+          <p>TYPESCRIPT</p>
+          <p>POSTGRESQL</p>
+        </div>
+        <div class="observation">
+          <p class="system-title">
+            &gt; OBSERVATION
+          </p>
+          <p>
+            Muaath is a full-stack developer focused
+            on turning ideas into functional systems.
+          </p>
+          <p>
+            Current areas of investigation include
+            backend architecture, deployment, and
+            interfaces designed to be useful,
+            intuitive, and slightly unsettling.
+          </p>
+        </div>
+      </div>
+      <!-- CURRENT OBJECTIVE -->
+      <p class="system-title">
+        &gt; CURRENT OBJECTIVE
+      </p>
+      <p class="objective">
+        BUILD.<br>
+        DEPLOY.<br>
+        REPEAT.
+      </p>
+      <!-- DYNAMIC CORRUPTED WARNING -->
+      <p class="warning" [class.corrupted]="aboutCompromised" aria-live="polite" aria-atomic="true">
+        @if (aboutCompromised) {
+          &gt; WARNING: UNAUTHORIZED OBSERVER DETECTED.<br>
+          THE SUBJECT IS AWARE OF YOUR PRESENCE.<br>
+          CONNECTION COMPROMISED_
+        } @else {
+          &gt; WARNING:<br>
+          SUBJECT HAS BEGUN CREATING THINGS<br>
+          THAT APPEAR TO BE WATCHING BACK.
+        }
+      </p>
+    </div>
+  </section>
 
-<router-outlet />
+  <!-- THE FRACTURED PASSAGE -->
+  <div class="fractured-passage">
+    <div class="fractured-content">
+      <p class="fractured-label">
+        SYSTEM // STRUCTURAL_ANOMALY_02
+      </p>
+      <div class="fractured-symbol">
+        //
+      </div>
+      <p class="fractured-message">
+        &gt; STRUCTURAL INTEGRITY COMPROMISED
+      </p>
+      <p class="fractured-submessage">
+        SOMETHING HAS BEEN DIGGING FROM BELOW.
+      </p>
+      <span class="fractured-coordinates">
+        SECTOR_02 // ACCESS UNRESTRICTED
+      </span>
+    </div>
+  </div>
+
+  <!-- PROJECTS: EXPERIMENT ARCHIVE -->
+  <section id="projects" class="projects" aria-labelledby="projects-title">
+    <div class="chamber-lights chamber-lights--archive" aria-hidden="true">
+      <div class="chamber-lamp chamber-lamp-left"></div>
+      <div class="chamber-lamp chamber-lamp-right"></div>
+    </div>
+    <!-- ARCHIVE HEADER -->
+    <div class="projects-header">
+      <p class="archive-label">
+        SYSTEM // EXPERIMENT_ARCHIVE
+      </p>
+      <h2 id="projects-title">THE EXPERIMENTS</h2>
+      <p class="archive-description">
+        Recovered records of systems, applications,
+        and experiments constructed by the subject.
+      </p>
+    </div>
+    <p class="mobile-archive-hint">&gt; TAP AN EXPERIMENT TO REVEAL ITS HIDDEN RECORD_</p>
+
+    <p id="experiment-access-hint" class="sr-only">Focus a project to preview its recovered record. Use Pin Record to keep it visible. Case files can be expanded with Enter or Space.</p>
+    <!-- EXPERIMENT GRID -->
+    <div class="experiment-grid">
+
+      <!-- EXPERIMENT 001 -->
+      <article class="experiment-card" tabindex="0" [class.is-pinned]="pinnedFragments[0]" aria-labelledby="project-title-001" aria-describedby="experiment-access-hint">
+        <div class="experiment-top">
+          <span>EXPERIMENT_001</span>
+          <span class="experiment-status">
+            ACTIVE
+          </span>
+        </div>
+        <!-- RECOVERED VISUAL RECORD 001 -->
+        <div class="visual-record-header">
+          <span class="visual-record-id">VISUAL_RECORD_001</span>
+          <span class="visual-record-status">SURVEILLANCE_CAPTURE</span>
+        </div>
+        <div class="experiment-visual visual-protiflo" aria-hidden="true">
+          <svg class="archive-art" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <defs>
+              <linearGradient id="archive-protiflo-beam" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f5da64" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="#e6c229" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <path d="M126 55 L134 55 L209 130 L51 130 Z" fill="url(#archive-protiflo-beam)" />
+            <path d="M98 40 L65 31 M162 40 L195 31" stroke="#8f7815" stroke-width="4" stroke-linecap="round" />
+            <ellipse cx="65" cy="31" rx="21" ry="7" fill="#15150f" stroke="#e6c229" stroke-width="1.2" />
+            <ellipse cx="195" cy="31" rx="21" ry="7" fill="#15150f" stroke="#e6c229" stroke-width="1.2" />
+            <path d="M43 29 H87 M173 29 H217" stroke="#e6c229" stroke-width="2" stroke-linecap="round" opacity=".48" />
+            <rect x="96" y="29" width="68" height="30" rx="15" fill="#15150f" stroke="#e6c229" stroke-width="1.6" />
+            <path d="M106 44 Q130 25 154 44 Q130 63 106 44 Z" fill="#d2b854" />
+            <circle cx="130" cy="44" r="10" fill="#353535" />
+            <circle cx="130" cy="44" r="4" fill="#050505" />
+            <circle cx="130" cy="63" r="2.5" fill="#e35a50" />
+          </svg>
+          <span class="visual-scan"></span>
+        </div>
+        <h3 id="project-title-001">PROTIFLO</h3>
+        <p>
+          An interactive portfolio inspired by eldritch
+          horror, featuring a living Watcher and
+          an exploration-based interface.
+        </p>
+        <div class="experiment-tech">
+          <span>ANGULAR</span>
+          <span>TYPESCRIPT</span>
+          <span>CSS</span>
+        </div>
+
+        <!-- EXPERIMENT 001 // CASE FILE -->
+        <details class="experiment-case-file">
+          <summary>
+            &gt; VIEW CASE FILE
+          </summary>
+          <div class="case-file-content">
+            <!-- OBJECTIVE -->
+            <div class="case-file-section">
+              <h4>01 // OBJECTIVE</h4>
+              <p>
+                Build an interactive developer portfolio
+                that combines modern web development
+                with eldritch horror and exploration-based
+                storytelling.
+              </p>
+            </div>
+            <!-- CONTRIBUTIONS -->
+            <div class="case-file-section">
+              <h4>02 // IMPLEMENTED FEATURES</h4>
+              <ul class="case-file-list">
+                <li>
+                  Developed a responsive interface
+                  using Angular and TypeScript.
+                </li>
+                <li>
+                  Created a hovering surveillance UAV
+                  with cursor-controlled lighting.
+                </li>
+                <li>
+                  Implemented light-sensitive project
+                  records and hidden transmissions.
+                </li>
+                <li>
+                  Built interactive terminals
+                  with dynamic boot sequences.
+                </li>
+                <li>
+                  Designed atmospheric environments
+                  with animated lighting and
+                  eldritch elements.
+                </li>
+              </ul>
+            </div>
+            <!-- TECHNICAL APPROACH -->
+            <div class="case-file-section">
+              <h4>03 // TECHNICAL APPROACH</h4>
+              <p>
+                Angular components manage the interface,
+                while TypeScript handles interactions,
+                scroll events, and light detection.
+                CSS animations create the atmospheric
+                effects and visual transitions.
+              </p>
+            </div>
+            <!-- SOURCE CODE -->
+            <div class="case-file-section">
+              <h4>04 // PROJECT LINKS</h4>
+              <a class="case-file-link" aria-label="Muaath GitHub profile, opens in a new tab" href="https://github.com/Warmmus" target="_blank" rel="noopener noreferrer">
+                &gt; GITHUB PROFILE ↗
+              </a>
+            </div>
+          </div>
+        </details>
+        <button type="button" class="experiment-pin-button" aria-label="Pin Protiflo recovered record" [attr.aria-pressed]="pinnedFragments[0]" aria-controls="recovered-fragment-001" (click)="toggleFragment(0)">&gt; {{ pinnedFragments[0] ? 'UNPIN RECORD' : 'PIN RECORD' }}</button>
+        <!-- HIDDEN RECORD 001 -->
+        <div id="recovered-fragment-001" class="experiment-secret">
+          <span class="experiment-secret-label">
+            &gt; RECOVERED_FRAGMENT_001
+          </span>
+          <p>
+            THE WATCHER WAS NOT PART OF
+            THE ORIGINAL DESIGN.
+          </p>
+        </div>
+      </article>
+
+      <!-- EXPERIMENT 002 -->
+      <article class="experiment-card" tabindex="0" [class.is-pinned]="pinnedFragments[1]" aria-labelledby="project-title-002" aria-describedby="experiment-access-hint">
+        <div class="experiment-top">
+          <span>EXPERIMENT_002</span>
+          <span class="experiment-status">
+            IN DEVELOPMENT
+          </span>
+        </div>
+        <!-- RECOVERED VISUAL RECORD 002 -->
+        <div class="visual-record-header">
+          <span class="visual-record-id">VISUAL_RECORD_002</span>
+          <span class="visual-record-status">NETWORK_TOPOLOGY</span>
+        </div>
+        <div class="experiment-visual visual-student-api" aria-hidden="true">
+          <svg class="archive-art" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <defs>
+              <radialGradient id="archive-api-halo">
+                <stop offset="0%" stop-color="#e6c229" stop-opacity=".18" />
+                <stop offset="100%" stop-color="#e6c229" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <circle cx="130" cy="65" r="61" fill="url(#archive-api-halo)" />
+            <path d="M130 65 L62 27 M130 65 L199 27 M130 65 L62 108 M130 65 L199 108"
+                  fill="none" stroke="#8f7815" stroke-width="2.2" stroke-linecap="round" />
+            <circle cx="62" cy="27" r="9" fill="#15150f" stroke="#e6c229" stroke-width="1.5" />
+            <circle cx="199" cy="27" r="9" fill="#15150f" stroke="#e6c229" stroke-width="1.5" />
+            <circle cx="62" cy="108" r="9" fill="#15150f" stroke="#e6c229" stroke-width="1.5" />
+            <circle cx="199" cy="108" r="9" fill="#15150f" stroke="#e6c229" stroke-width="1.5" />
+            <circle cx="130" cy="65" r="19" fill="#332b0e" stroke="#e6c229" stroke-width="2" />
+            <circle cx="130" cy="65" r="7" fill="#e6c229" />
+          </svg>
+          <span class="visual-scan"></span>
+        </div>
+        <h3 id="project-title-002">STUDENT API</h3>
+        <p>
+          A REST API built with Spring Boot,
+          supporting student management,
+          validation, and structured error handling.
+        </p>
+        <div class="experiment-tech">
+          <span>JAVA</span>
+          <span>SPRING BOOT</span>
+          <span>REST API</span>
+        </div>
+
+        <!-- EXPERIMENT 002 // CASE FILE -->
+        <details class="experiment-case-file">
+          <summary>
+            &gt; VIEW CASE FILE
+          </summary>
+          <div class="case-file-content">
+            <!-- OBJECTIVE -->
+            <div class="case-file-section">
+              <h4>01 // OBJECTIVE</h4>
+              <p>
+                Develop a RESTful API for managing
+                student records, applying backend
+                architecture principles, data validation,
+                and structured error handling.
+              </p>
+            </div>
+            <!-- IMPLEMENTED FEATURES -->
+            <div class="case-file-section">
+              <h4>02 // IMPLEMENTED FEATURES</h4>
+              <ul class="case-file-list">
+                <li>
+                  Implemented CRUD operations using
+                  RESTful endpoints.
+                </li>
+                <li>
+                  Created a layered architecture with
+                  Controller, Service, and Repository.
+                </li>
+                <li>
+                  Used DTOs to separate API requests
+                  and responses from database entities.
+                </li>
+                <li>
+                  Added input validation for student
+                  information and email addresses.
+                </li>
+                <li>
+                  Implemented email uniqueness checks
+                  to prevent duplicate records.
+                </li>
+                <li>
+                  Created global exception handling
+                  with meaningful HTTP status codes.
+                </li>
+              </ul>
+            </div>
+            <!-- TECHNICAL APPROACH -->
+            <div class="case-file-section">
+              <h4>03 // TECHNICAL APPROACH</h4>
+              <p>
+                Built using Java and Spring Boot,
+                with Spring Data JPA and Hibernate
+                for database persistence.
+                The API follows a layered structure
+                and uses DTOs, Bean Validation,
+                and centralized exception handling.
+              </p>
+            </div>
+            <!-- API OPERATIONS -->
+            <div class="case-file-section">
+              <h4>04 // API OPERATIONS</h4>
+              <ul class="case-file-list">
+                <li>GET — Retrieve student records</li>
+                <li>POST — Create a new student</li>
+                <li>PUT — Update student details</li>
+                <li>DELETE — Remove a student</li>
+              </ul>
+            </div>
+            <!-- PROJECT STATUS -->
+            <div class="case-file-section">
+              <h4>05 // PROJECT STATUS</h4>
+              <p>
+                Core CRUD functionality, validation,
+                and exception handling implemented.
+                Additional improvements are planned.
+              </p>
+            </div>
+          </div>
+        </details>
+        <button type="button" class="experiment-pin-button" aria-label="Pin Student API recovered record" [attr.aria-pressed]="pinnedFragments[1]" aria-controls="recovered-fragment-002" (click)="toggleFragment(1)">&gt; {{ pinnedFragments[1] ? 'UNPIN RECORD' : 'PIN RECORD' }}</button>
+        <!-- HIDDEN RECORD 002 -->
+        <div id="recovered-fragment-002" class="experiment-secret">
+          <span class="experiment-secret-label">
+            &gt; RECOVERED_FRAGMENT_002
+          </span>
+          <p>
+            AN UNKNOWN RECORD WAS FOUND.<br>
+            NO REQUEST CREATED IT.<br>
+            NO USER CLAIMS OWNERSHIP.
+          </p>
+        </div>
+      </article>
+
+      <!-- EXPERIMENT 003 -->
+
+      <!-- EXPERIMENT 003 // MYTHOS ARABIA API -->
+      <article class="experiment-card" tabindex="0" [class.is-pinned]="pinnedFragments[2]" aria-labelledby="project-title-003" aria-describedby="experiment-access-hint">
+        <div class="experiment-top">
+          <span>EXPERIMENT_003</span>
+          <span class="experiment-status">
+            REST API
+          </span>
+        </div>
+        <!-- RECOVERED VISUAL RECORD 003 -->
+        <div class="visual-record-header">
+          <span class="visual-record-id">VISUAL_RECORD_003</span>
+          <span class="visual-record-status">MYTHIC_SPECIMEN</span>
+        </div>
+        <div class="experiment-visual visual-mythos" aria-hidden="true">
+          <svg class="archive-art" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <defs>
+              <radialGradient id="archive-mythos-moonlight">
+                <stop offset="0%" stop-color="#e6c229" stop-opacity=".15" />
+                <stop offset="100%" stop-color="#e6c229" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <circle cx="188" cy="30" r="39" fill="url(#archive-mythos-moonlight)" />
+            <circle cx="188" cy="30" r="16" fill="#e6c229" opacity=".75" />
+            <path d="M0 103 Q65 65 130 101 Q198 63 260 100 L260 130 L0 130 Z" fill="#483217" />
+            <path d="M0 117 Q93 78 168 115 Q225 91 260 112 L260 130 L0 130 Z" fill="#241a0d" />
+            <path d="M96 64 Q130 30 164 64 Q130 98 96 64 Z" fill="#815a28" stroke="#e6c229" stroke-width="1.3" />
+            <circle cx="130" cy="64" r="13" fill="#17110c" />
+            <circle cx="130" cy="64" r="5" fill="#e6c229" />
+            <circle cx="130" cy="64" r="2" fill="#070706" />
+          </svg>
+          <span class="visual-scan"></span>
+        </div>
+        <h3 id="project-title-003">MYTHOS ARABIA API</h3>
+        <p>
+          A RESTful API for exploring creatures
+          from Arabian mythology, built using
+          FastAPI with a layered architecture,
+          database integration, and validation.
+        </p>
+        <div class="experiment-tech">
+          <span>PYTHON</span>
+          <span>FASTAPI</span>
+          <span>SQLITE</span>
+          <span>PYDANTIC</span>
+        </div>
+        <!-- PROJECT CASE FILE -->
+        <details class="experiment-case-file">
+          <summary>
+            &gt; VIEW CASE FILE
+          </summary>
+          <div class="case-file-content">
+            <!-- OBJECTIVE -->
+            <div class="case-file-section">
+              <h4>01 // OBJECTIVE</h4>
+              <p>
+                Develop a RESTful backend API
+                centered around creatures from
+                Arabian folklore while practicing
+                clean architecture, database design,
+                request validation, and error handling.
+              </p>
+            </div>
+            <!-- IMPLEMENTED FEATURES -->
+            <div class="case-file-section">
+              <h4>02 // IMPLEMENTED FEATURES</h4>
+              <ul class="case-file-list">
+                <li>
+                  Implemented full CRUD operations
+                  for mythology creatures.
+                </li>
+                <li>
+                  Added creature search by name.
+                </li>
+                <li>
+                  Integrated SQLite for
+                  persistent data storage.
+                </li>
+                <li>
+                  Used Pydantic schemas for
+                  request and response validation.
+                </li>
+                <li>
+                  Prevented duplicate creature
+                  names using validation and
+                  database constraints.
+                </li>
+                <li>
+                  Implemented custom exceptions
+                  and global error handlers.
+                </li>
+                <li>
+                  Provided interactive API
+                  documentation using Swagger UI.
+                </li>
+              </ul>
+            </div>
+            <!-- ARCHITECTURE -->
+            <div class="case-file-section">
+              <h4>03 // ARCHITECTURE</h4>
+              <p>
+                The API follows a layered structure
+                with FastAPI routes handling HTTP
+                requests, a service layer managing
+                business logic and database operations,
+                and Pydantic schemas handling
+                validation and serialization.
+              </p>
+            </div>
+            <!-- API ENDPOINTS -->
+            <div class="case-file-section">
+              <h4>04 // API OPERATIONS</h4>
+              <ul class="case-file-list">
+                <li>GET /creatures</li>
+                <li>GET /creatures/&#123;id&#125;</li>
+                <li>GET /search?name=</li>
+                <li>POST /creatures</li>
+                <li>PUT /creatures/&#123;id&#125;</li>
+                <li>DELETE /creatures/&#123;id&#125;</li>
+              </ul>
+            </div>
+            <!-- TECHNOLOGIES -->
+            <div class="case-file-section">
+              <h4>05 // TECHNOLOGIES</h4>
+              <p>
+                Python 3, FastAPI, SQLite,
+                Pydantic, and Uvicorn.
+              </p>
+            </div>
+            <!-- PROJECT LINKS -->
+            <div class="case-file-section">
+              <h4>06 // PROJECT LINKS</h4>
+              <a class="case-file-link" aria-label="Mythos Arabia source code, opens in a new tab" href="https://github.com/Warmmus/mythos-arabia-api" target="_blank" rel="noopener noreferrer">
+                &gt; SOURCE CODE ↗
+              </a>
+              <a class="case-file-link" aria-label="Mythos Arabia Swagger documentation, opens in a new tab" href="https://mythos-arabia-api.onrender.com/docs" target="_blank" rel="noopener noreferrer">
+                &gt; SWAGGER API DOCS ↗
+              </a>
+            </div>
+          </div>
+        </details>
+        <button type="button" class="experiment-pin-button" aria-label="Pin Mythos Arabia API recovered record" [attr.aria-pressed]="pinnedFragments[2]" aria-controls="recovered-fragment-003" (click)="toggleFragment(2)">&gt; {{ pinnedFragments[2] ? 'UNPIN RECORD' : 'PIN RECORD' }}</button>
+        <!-- HIDDEN MYTHOLOGY RECORD -->
+        <div id="recovered-fragment-003" class="experiment-secret">
+          <span class="experiment-secret-label">
+            &gt; RECOVERED_FRAGMENT_003
+          </span>
+          <p>
+            ENTITY_008 DETECTED.<br>
+            NO CREATURE MATCHES THIS RECORD.<br>
+            DO NOT RUN ANOTHER SEARCH.
+          </p>
+        </div>
+      </article>
+    </div>
+    <!-- END EXPERIMENT GRID -->
+    <!-- HIDDEN CAVE WALL / OUTSIDE THE EXPERIMENT GRID -->
+    <div class="cave-wall" role="group" aria-label="Hidden cave transmissions">
+      <!-- LEFT TRANSMISSION -->
+      <button type="button" class="cave-whisper cave-whisper-left" [class.is-decoded]="decodedWhispers[0]" [attr.aria-pressed]="decodedWhispers[0]" aria-controls="cave-whisper-text-1" aria-describedby="cave-whisper-text-1" aria-label="Decode unknown transmission 1" (click)="toggleWhisper(0)">
+        <span class="whisper-label">
+          // UNKNOWN TRANSMISSION_01
+        </span>
+        <span id="cave-whisper-text-1" class="whisper-copy">
+          THE LIGHT DOES NOT<br>
+          KEEP THEM AWAY.<br>
+          IT TELLS THEM<br>
+          WHERE YOU ARE.
+        </span>
+      </button>
+      <!-- RIGHT TRANSMISSION -->
+      <button type="button" class="cave-whisper cave-whisper-right" [class.is-decoded]="decodedWhispers[1]" [attr.aria-pressed]="decodedWhispers[1]" aria-controls="cave-whisper-text-2" aria-describedby="cave-whisper-text-2" aria-label="Decode unknown transmission 2" (click)="toggleWhisper(1)">
+        <span class="whisper-label">
+          // UNKNOWN TRANSMISSION_02
+        </span>
+        <span id="cave-whisper-text-2" class="whisper-copy">
+          THERE WERE ONLY<br>
+          SEVEN EYES.<br>
+          WHO IS THE<br>
+          EIGHTH?
+        </span>
+      </button>
+      <!-- SECRET OBSERVER RECORD -->
+      <div class="eighth-record">
+        <span class="eighth-record-label">
+          &gt; RECOVERED_FRAGMENT_008
+        </span>
+        <p>
+          THE WATCHER DOES NOT<br>
+          FOLLOW YOUR MOVEMENTS.
+        </p>
+        <p class="eighth-record-warning">
+          THE WATCHER WILL NOT ALLOW IT
+        </p>
+      </div>
+    </div>
+    <!-- END CAVE WALL -->
+    <!-- ARCHIVE WARNING -->
+    <p class="archive-warning">
+      &gt; ADDITIONAL RECORDS DETECTED.<br>
+      &gt; ACCESS RESTRICTED_
+    </p>
+  </section>
+
+  <!-- THE UNSEEN PRESENCE -->
+  <section class="presence-corridor" aria-labelledby="presence-title">
+    <div class="presence-content">
+      <p class="presence-label">
+        SYSTEM // CORRIDOR_03
+      </p>
+      <h2 id="presence-title">THE UNSEEN PRESENCE</h2>
+      <p class="presence-message">
+        &gt; MOVEMENT DETECTED IN THE DARKNESS
+      </p>
+      <p class="presence-submessage">
+        YOUR FOOTSTEPS ARE NOT THE ONLY ONES.
+      </p>
+      <span class="presence-warning">
+        DO NOT TURN AROUND_
+      </span>
+    </div>
+    <!-- ELDRITCH PRESENCE -->
+    <div class="corridor-presence" aria-hidden="true">
+      <!-- LEFT TENTACLES -->
+      <div class="tentacle-cluster tentacle-cluster-left">
+        <span class="tentacle tentacle-left-1">
+          <span class="tentacle-eye"></span>
+        </span>
+        <span class="tentacle tentacle-left-2">
+          <span class="tentacle-eye"></span>
+          <span class="tentacle-eye"></span>
+        </span>
+        <span class="tentacle tentacle-left-3">
+          <span class="tentacle-eye"></span>
+        </span>
+      </div>
+      <!-- RIGHT TENTACLES -->
+      <div class="tentacle-cluster tentacle-cluster-right">
+        <span class="tentacle tentacle-right-1">
+          <span class="tentacle-eye"></span>
+        </span>
+        <span class="tentacle tentacle-right-2">
+          <span class="tentacle-eye"></span>
+          <span class="tentacle-eye"></span>
+        </span>
+        <span class="tentacle tentacle-right-3">
+          <span class="tentacle-eye"></span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTRUMENT CHAMBER -->
+  <section id="stack" class="instruments" aria-labelledby="instruments-title">
+    <div class="chamber-lights chamber-lights--instruments" aria-hidden="true">
+      <div class="chamber-lamp chamber-lamp-left"></div>
+      <div class="chamber-lamp chamber-lamp-right"></div>
+    </div>
+    <div class="instruments-header">
+      <p class="instrument-label">
+        SYSTEM // INSTRUMENT_CHAMBER
+      </p>
+      <h2 id="instruments-title">THE INSTRUMENTS</h2>
+      <p>
+        Recovered tools and technologies used
+        in the construction of the experiments.
+      </p>
+    </div>
+    <div class="instrument-grid">
+      <!-- BACKEND -->
+      <article class="instrument-panel">
+        <span class="instrument-id">MODULE_001</span>
+        <h3>THE ENGINE</h3>
+        <p class="instrument-category">BACKEND SYSTEMS</p>
+        <ul>
+          <li>JAVA</li>
+          <li>SPRING BOOT</li>
+          <li>C#</li>
+          <li>ASP.NET MVC</li>
+        </ul>
+      </article>
+      <!-- FRONTEND -->
+      <article class="instrument-panel">
+        <span class="instrument-id">MODULE_002</span>
+        <h3>THE INTERFACE</h3>
+        <p class="instrument-category">FRONTEND SYSTEMS</p>
+        <ul>
+          <li>ANGULAR</li>
+          <li>TYPESCRIPT</li>
+          <li>HTML</li>
+          <li>CSS</li>
+        </ul>
+      </article>
+      <!-- DATABASES & TOOLS -->
+      <article class="instrument-panel instrument-panel-archive" tabindex="0" [class.is-archive-pinned]="archivePinned" aria-label="The Archive instrument. Focus or use Access Archive to inspect the hidden terminal.">
+        <span class="instrument-id">MODULE_003</span>
+        <h3>THE ARCHIVE</h3>
+        <p class="instrument-category">DATA & DEVELOPMENT TOOLS</p>
+        <ul>
+          <li>SQL SERVER</li>
+          <li>POSTGRESQL</li>
+          <li>GIT</li>
+          <li>AZURE DEVOPS</li>
+        </ul>
+        <button type="button" class="archive-access-button" aria-label="Pin Archive terminal" [attr.aria-pressed]="archivePinned" aria-controls="archive-forbidden-terminal" (click)="toggleArchive()">&gt; {{ archivePinned ? 'UNPIN ARCHIVE' : 'PIN ARCHIVE' }}</button>
+        <!-- FORBIDDEN TERMINAL -->
+        <div id="archive-forbidden-terminal" class="instrument-terminal">
+          <div class="terminal-header">
+            <span>MODULE_003 // SYSTEM ACTIVE</span>
+            <span class="terminal-indicator"></span>
+          </div>
+          <div class="terminal-screen">
+            <p>&gt; INITIALIZING...</p>
+            <p>&gt; READING ARCHIVE...</p>
+            <p>&gt; CONNECTION ESTABLISHED.</p>
+            <p class="terminal-warning">
+              &gt; UNAUTHORIZED PRESENCE DETECTED.
+            </p>
+            <p class="terminal-final">
+              &gt; THERE IS SOMETHING BELOW US<span class="terminal-cursor">_</span>
+            </p>
+          </div>
+          <span class="terminal-footer">
+            SIGNAL SOURCE: UNKNOWN
+          </span>
+        </div>
+      </article>
+    </div>
+    <p class="instrument-warning">
+      &gt; WARNING: ONE INSTRUMENT REMAINS ACTIVE_
+    </p>
+  </section>
+
+  <!-- THE DESCENT SHAFT -->
+  <div class="descent-shaft">
+    <div class="descent-content">
+      <p class="descent-label">
+        SYSTEM // DESCENT_SHAFT_04
+      </p>
+      <div class="descent-line"></div>
+      <div class="descent-symbol">
+        ↓
+      </div>
+      <h3 role="heading" aria-level="2">UNMAPPED DEPTH</h3>
+      <p class="descent-warning">
+        &gt; NO SIGNAL DETECTED BELOW THIS POINT
+      </p>
+      <div class="descent-line"></div>
+      <p class="descent-bottom">
+        CONTINUE DESCENDING_
+      </p>
+    </div>
+  </div>
+
+  <!-- THE FINAL TRANSMISSION -->
+  <section id="contact" class="transmission" aria-labelledby="contact-title">
+    <div class="chamber-lights chamber-lights--contact" aria-hidden="true">
+      <div class="chamber-lamp chamber-lamp-left"></div>
+      <div class="chamber-lamp chamber-lamp-right"></div>
+    </div>
+    <!-- CHAMBER HEADER -->
+    <div class="transmission-header">
+      <p class="transmission-label">
+        SYSTEM // TRANSMISSION_CHAMBER
+      </p>
+      <h2 id="contact-title">THE FINAL TRANSMISSION</h2>
+      <p>
+        You have reached the end of the known system.
+        One communication channel remains operational.
+      </p>
+    </div>
+    <!-- COMMUNICATION TERMINAL -->
+    <div class="transmission-terminal" role="group" aria-label="Communication terminal" tabindex="-1" [class.is-online]="transmissionStage() === 6">
+      <span class="sr-only" role="status" aria-live="polite" aria-atomic="true">{{ transmissionAnnouncement() }}</span>
+      <div class="transmission-terminal-header">
+        <span>
+          COMMUNICATION TERMINAL // 001
+        </span>
+        <span class="transmission-status">
+          @if (transmissionStage() === 0) {
+            SYSTEM OFFLINE
+          } @else if (transmissionStage() < 6) {
+            CONNECTING...
+          } @else {
+            CHANNEL OPEN
+          }
+        </span>
+      </div>
+      <!-- DYNAMIC SYSTEM LOG -->
+      <div class="transmission-log">
+        @if (transmissionStage() === 0) {
+          <!-- TERMINAL OFFLINE -->
+          <p class="transmission-alert">
+            &gt; SYSTEM OFFLINE.
+          </p>
+          <p>
+            &gt; AWAITING SIGNAL SOURCE...
+          </p>
+          <p>
+            &gt; ILLUMINATE TERMINAL TO RESTORE CONNECTION.
+          </p>
+          <!-- KEYBOARD / TOUCH ALTERNATIVE -->
+          <button type="button" class="transmission-boot-button" (click)="startTransmissionBoot(true)">
+            &gt; ESTABLISH CONNECTION
+          </button>
+        } @else {
+          <!-- BOOT SEQUENCE -->
+          <p>
+            &gt; SCANNING FREQUENCIES...
+          </p>
+          @if (transmissionStage() >= 2) {
+            <p>&gt; SIGNAL DETECTED.</p>
+          }
+          @if (transmissionStage() >= 3) {
+            <p>&gt; ESTABLISHING CONNECTION...</p>
+          }
+          @if (transmissionStage() >= 4) {
+            <p class="transmission-success">
+              &gt; CONNECTION ESTABLISHED.
+            </p>
+          }
+          @if (transmissionStage() >= 5) {
+            <p>&gt; RECIPIENT: MUAATH</p>
+          }
+          @if (transmissionStage() >= 6) {
+            <p class="transmission-alert">
+              &gt; SOMEONE IS LISTENING_
+            </p>
+          }
+        }
+      </div>
+      <!-- CONTACT CHANNELS -->
+      @if (transmissionStage() === 6) {
+        <div class="transmission-channels">
+          <p class="transmission-instruction">
+            SELECT COMMUNICATION CHANNEL:
+          </p>
+          <a
+            class="transmission-button transmission-primary"
+            href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=moazalshareef%40gmail.com&amp;su=PROTIFLO%20%2F%2F%20New%20Transmission"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Send Muaath a transmission through Gmail (opens a new tab)"
+          >
+            &gt; SEND TRANSMISSION ↗
+          </a>
+          <a class="transmission-button transmission-secondary" aria-label="Access Muaath GitHub archive, opens in a new tab" href="https://github.com/Warmmus" target="_blank" rel="noopener noreferrer">
+            &gt; ACCESS GITHUB ARCHIVE
+          </a>
+        </div>
+      } @else {
+        <div class="transmission-channels">
+          <p class="transmission-instruction">
+            &gt; COMMUNICATION CHANNELS LOCKED_
+          </p>
+        </div>
+      }
+      <!-- TERMINAL FOOTER -->
+      <div class="transmission-footer">
+        <span>TRANSMISSION PROTOCOL: ACTIVE</span>
+        <span>END OF RECORD_</span>
+      </div>
+    </div>
+    <!-- FINAL MESSAGE -->
+    <p class="transmission-ending">
+      &gt; THE SYSTEM HAS ENDED.<br>
+      &gt; THE OBSERVATION HAS NOT.
+    </p>
+  </section>
+  </main>
+</div>
