@@ -1,84 +1,134 @@
+
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Basic HTML -->
   <meta charset="utf-8">
-  <title>Portfolio</title>
+
+  <title>Protiflo | Muaath Alshareef — Full-Stack Developer</title>
+
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <!-- PROTIFLO: add inside the <head> of src/index.html.
-     Keep the existing <base href="/">, viewport meta tag, and font links.
-     Replace any old <title> and duplicate meta description/favicon tags. -->
-<title>Protiflo | Muaath Alshareef — Full-Stack Developer</title>
-<meta name="description" content="Explore Protiflo, Muaath Alshareef's interactive developer portfolio. Discover Angular, Java Spring Boot and Python projects in an eldritch-inspired archive.">
-<meta name="theme-color" content="#080806">
-<meta name="robots" content="index,follow">
 
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
-<meta
-  name="twitter:image"
-  content="https://muaath.wormmus.com/og-protiflo.jpg"
->
-<meta property="og:type" content="website">
+  <!-- SEO -->
+  <meta
+    name="description"
+    content="Explore Protiflo, Muaath Alshareef's interactive developer portfolio. Discover Angular, Java Spring Boot, and Python projects in an eldritch-inspired archive."
+  >
 
-<meta
-  property="og:title"
-  content="Protiflo | Muaath Alshareef"
->
+  <meta name="author" content="Muaath Alshareef">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#080806">
 
-<meta
-  property="og:description"
-  content="An interactive developer portfolio beneath the surface. Explore projects, experiments and hidden records."
->
+  <link
+    rel="canonical"
+    href="https://muaath.wormmus.com/"
+  >
 
-<meta
-  property="og:url"
-  content="https://muaath.wormmus.com/"
->
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="/favicon.ico"
+    sizes="any"
+  >
 
-<meta
-  property="og:image"
-  content="https://muaath.wormmus.com/og-protiflo.jpg"
->
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="64x64"
+    href="/favicon-64.png"
+  >
 
-<meta
-  property="og:image:secure_url"
-  content="https://muaath.wormmus.com/og-protiflo.jpg"
->
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  >
 
-<!-- Open Graph / LinkedIn -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Protiflo">
-<meta property="og:title" content="Protiflo | Muaath Alshareef">
-<meta property="og:description" content="An interactive developer portfolio beneath the surface. Explore projects, experiments and hidden records.">
-<!-- Replace YOUR-LIVE-DOMAIN.example with your actual production domain after deployment. -->
-<meta property="og:image" content="https://YOUR-LIVE-DOMAIN.example/og-protiflo.jpg">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Protiflo developer portfolio by Muaath Alshareef featuring a golden sigil on a dark background">
+  <!-- Open Graph: LinkedIn, Facebook, Discord -->
+  <meta property="og:type" content="website">
 
-<!-- X / Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Protiflo | Muaath Alshareef">
-<meta name="twitter:description" content="Explore an interactive developer portfolio of systems, applications and experiments.">
-<meta name="twitter:image" content="https://YOUR-LIVE-DOMAIN.example/og-protiflo.jpg">
+  <meta
+    property="og:site_name"
+    content="Protiflo"
+  >
 
-<link rel="canonical"
-      href="https://muaath.wormmus.com/">
+  <meta
+    property="og:title"
+    content="Protiflo | Muaath Alshareef"
+  >
 
-<meta property="og:url"
-      content="https://muaath.wormmus.com/">
+  <meta
+    property="og:description"
+    content="An interactive developer portfolio beneath the surface. Explore projects, experiments, and hidden records."
+  >
 
-<meta property="og:image"
-      content="https://muaath.wormmus.com/og-protiflo.jpg">
+  <meta
+    property="og:url"
+    content="https://muaath.wormmus.com/"
+  >
 
-<meta name="twitter:image"
-      content="https://muaath.wormmus.com/og-protiflo.jpg">
+  <meta
+    property="og:image"
+    content="https://muaath.wormmus.com/og-protiflo.jpg"
+  >
+
+  <meta
+    property="og:image:secure_url"
+    content="https://muaath.wormmus.com/og-protiflo.jpg"
+  >
+
+  <meta
+    property="og:image:type"
+    content="image/jpeg"
+  >
+
+  <meta
+    property="og:image:width"
+    content="1200"
+  >
+
+  <meta
+    property="og:image:height"
+    content="630"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="Protiflo developer portfolio by Muaath Alshareef, featuring a golden sigil on a dark background."
+  >
+
+  <!-- Twitter / X -->
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Protiflo | Muaath Alshareef"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Explore an interactive developer portfolio of systems, applications, and experiments."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://muaath.wormmus.com/og-protiflo.jpg"
+  >
+
+  <meta
+    name="twitter:image:alt"
+    content="Protiflo developer portfolio featuring a golden sigil."
+  >
 </head>
+
 <body>
   <app-root></app-root>
 </body>
