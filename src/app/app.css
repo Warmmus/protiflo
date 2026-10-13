@@ -4074,11 +4074,15 @@ h1 {
    SMALL SCREENS
    ===================================== */
 
+
+/* UAV-008 // MOBILE ROTOR ALIGNMENT ONLY */
 @media (max-width: 700px) {
   .uav-hardware {
-    scale: 0.72;
+    scale: none;
+    transform: translate(-50%, -50%) scale(0.72);
   }
 }
+
 
 
 /* =====================================
