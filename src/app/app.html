@@ -1,5 +1,9 @@
-<div class="portfolio">
+<div class="portfolio" [class.reading-mode]="readingMode()">
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="utility-dock" role="group" aria-label="Quick access">
+    <a href="mailto:moazalshareef@gmail.com">Email me <span aria-hidden="true">↗</span></a>
+    <button type="button" [attr.aria-pressed]="readingMode()" (click)="toggleReadingMode()">Reading mode <span aria-hidden="true">{{ readingMode() ? 'ON' : 'OFF' }}</span></button>
+  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar" aria-label="Primary navigation">
@@ -52,6 +56,7 @@
     <!-- NAVIGATION -->
     <div class="nav-links">
       <a href="#about">About</a>
+      <a href="#career">Career</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </div>
@@ -96,12 +101,16 @@
         FULL-STACK DEVELOPER
       </p>
       <h1 id="hero-title">MUAATH</h1>
+      <p class="description hero-intro">I build full-stack web applications and APIs, with hands-on experience supporting enterprise systems.</p>
       <div class="hero-actions">
         <a class="primary-button" href="#projects">
           View My Work
         </a>
         <a class="secondary-button" aria-label="Muaath on GitHub, opens in a new tab" href="https://github.com/Warmmus" target="_blank" rel="noopener noreferrer">
           GitHub ↗
+        </a>
+        <a class="secondary-button" href="Muaath-Alshareef-CV.pdf" download="Muaath-Alshareef-CV.pdf">
+          Download CV ↓
         </a>
       </div>
     </div>
@@ -186,6 +195,96 @@
           THAT APPEAR TO BE WATCHING BACK.
         }
       </p>
+    </div>
+  </section>
+
+  <!-- CAREER: RECOVERED PERSONNEL RECORDS -->
+  <section id="career" class="career" aria-labelledby="career-title">
+    <header class="career-header">
+      <p class="archive-label">SYSTEM // PERSONNEL_ARCHIVE</p>
+      <h2 id="career-title">THE JOURNEY</h2>
+      <p class="career-intro">Experience in enterprise systems, IT support, and full-stack development. The records behind the work.</p>
+      <nav class="career-index" aria-label="Career sections">
+        <a href="#experience">01 / Experience</a>
+        <a href="#education">02 / Education</a>
+      </nav>
+    </header>
+
+    <div class="career-grid">
+      <section id="experience" class="career-experience" aria-labelledby="experience-title">
+        <h3 id="experience-title" class="career-section-title">01 // EXPERIENCE</h3>
+        <ol class="career-timeline">
+          <li class="career-record">
+            <div class="career-record-meta"><span>DEC 2025 — PRESENT</span><span class="career-status">CURRENT</span></div>
+            <h4>Help Desk Specialist <span>(Tamheer)</span></h4>
+            <p class="career-organization">IKEA Al Sulaiman</p>
+            <ul class="career-details">
+              <li>Managed Active Directory user provisioning, authentication, and access control.</li>
+              <li>Supported Microsoft Dynamics NAV Classic and resolved discrepancies between application data and database records.</li>
+              <li>Monitored IT service availability, managed incidents in SolarWinds Service Desk, and delivered remote troubleshooting through RealVNC.</li>
+            </ul>
+            <div class="career-tags" aria-label="Tools"><span>Active Directory</span><span>Dynamics NAV</span><span>SolarWinds</span><span>RealVNC</span></div>
+          </li>
+          <li class="career-record">
+            <div class="career-record-meta"><span>OCT 2024 — JAN 2025</span><span>COOP / 4 MONTHS</span></div>
+            <h4>Full Stack Web Developer</h4>
+            <p class="career-organization">Royal Commission for Jubail and Yanbu</p>
+            <ul class="career-details">
+              <li>Collaborated on a Single Sign-On system for Royal Commission applications.</li>
+              <li>Worked with ASP.NET MVC, C#, Microsoft Azure, and SQL Server Management Studio.</li>
+              <li>Contributed to database design and improved UI/UX for web development projects.</li>
+            </ul>
+            <div class="career-tags" aria-label="Technologies"><span>ASP.NET MVC</span><span>C#</span><span>Azure</span><span>SQL Server</span></div>
+          </li>
+          <li class="career-record">
+            <div class="career-record-meta"><span>JUL 2024 — SEP 2024</span><span>COOP / 3 MONTHS</span></div>
+            <h4>IT Support</h4>
+            <p class="career-organization">Royal Commission for Jubail and Yanbu</p>
+            <ul class="career-details">
+              <li>Troubleshot hardware and software, including backup and recovery systems.</li>
+              <li>Resolved network and connectivity issues to minimize user downtime.</li>
+              <li>Supported remote and on-site users with technical assistance and customer service.</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section id="education" class="career-education" aria-labelledby="education-title">
+        <h3 id="education-title" class="career-section-title">02 // EDUCATION</h3>
+        <article class="education-record">
+          <p class="career-record-meta">ACADEMIC RECORD / 2025</p>
+          <span class="education-mark" aria-hidden="true">&lt;/&gt;</span>
+          <h4>Bachelor in Computer Science</h4>
+          <p class="career-organization">Yanbu Industrial College</p>
+          <p class="education-location">Yanbu, Saudi Arabia</p>
+        </article>
+
+        <div class="career-certifications">
+          <h3 class="career-section-title">ADDITIONAL CREDENTIALS</h3>
+          <article class="credential">
+            <span class="career-record-meta">2025 / MICROSOFT</span>
+            <h4>Microsoft Certified: Azure Fundamentals</h4>
+            <a class="credential-link" href="https://learn.microsoft.com/en-us/users/muaathalshareef-4025/credentials/5c2628d4f36d987" target="_blank" rel="noopener noreferrer" aria-label="View Microsoft Azure Fundamentals credential, opens in a new tab">View credential <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="credential">
+            <span class="career-record-meta">2023 / EDX</span>
+            <h4>CS50’s Introduction to Computer Science</h4>
+            <a class="credential-link" href="https://courses.edx.org/certificates/663e28a0c58549b9941f8684a2cf8930" target="_blank" rel="noopener noreferrer" aria-label="View CS50 certificate on edX, opens in a new tab">View certificate <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+
+        <aside class="career-download" aria-label="Download curriculum vitae">
+          <div class="dossier-top"><span>PERSONNEL FILE / 001</span><span class="dossier-format">PDF</span></div>
+          <div class="dossier-identity">
+            <svg class="dossier-icon" viewBox="0 0 48 60" fill="none" aria-hidden="true" focusable="false"><path d="M6 2h24l12 12v44H6zM30 2v12h12M14 28h20M14 35h20M14 42h12" stroke="currentColor" stroke-width="1.5"/><path d="M14 20h8" stroke="currentColor" stroke-width="3"/></svg>
+            <div><h4>Muaath Alshareef</h4><p>Curriculum vitae</p></div>
+          </div>
+          <p>Experience, education, and technical skills in one complete dossier.</p>
+          <a class="dossier-preview" href="Muaath-Alshareef-CV.pdf" target="_blank" rel="noopener noreferrer" aria-label="Preview Muaath Alshareef CV PDF, opens in a new tab">Preview CV <span aria-hidden="true">↗</span></a>
+          <a class="primary-button" href="Muaath-Alshareef-CV.pdf" download="Muaath-Alshareef-CV.pdf">Download CV <span aria-hidden="true">↓</span></a>
+          <span class="career-file-type">PDF / 139 KB <span aria-hidden="true">·</span> PREVIEW OPENS IN A NEW TAB</span>
+        </aside>
+      </section>
     </div>
   </section>
 
@@ -280,6 +379,7 @@
         </div>
 
         <!-- EXPERIMENT 001 // CASE FILE -->
+        <div class="project-outcome"><span>DELIVERED</span><p>An interactive portfolio with accessible paths through the archive.</p></div>
         <details class="experiment-case-file">
           <summary>
             &gt; VIEW CASE FILE
@@ -287,17 +387,12 @@
           <div class="case-file-content">
             <!-- OBJECTIVE -->
             <div class="case-file-section">
-              <h4>01 // OBJECTIVE</h4>
-              <p>
-                Build an interactive developer portfolio
-                that combines modern web development
-                with eldritch horror and exploration-based
-                storytelling.
-              </p>
+              <h4>01 // THE PROBLEM</h4>
+              <p>A portfolio needs to make technical work easy to assess while expressing a distinct creative identity. The challenge was to combine useful project information with an atmospheric exploration experience.</p>
             </div>
             <!-- CONTRIBUTIONS -->
             <div class="case-file-section">
-              <h4>02 // IMPLEMENTED FEATURES</h4>
+              <h4>02 // MY CONTRIBUTION</h4>
               <ul class="case-file-list">
                 <li>
                   Developed a responsive interface
@@ -333,9 +428,13 @@
                 effects and visual transitions.
               </p>
             </div>
+            <div class="case-file-section case-file-result">
+              <h4>04 // THE RESULT</h4>
+              <p>Visitors can explore projects, review experience and credentials, and preview or download the CV. Keyboard and touch controls provide access to the hidden records, while reduced-motion support limits animation.</p>
+            </div>
             <!-- SOURCE CODE -->
             <div class="case-file-section">
-              <h4>04 // PROJECT LINKS</h4>
+              <h4>05 // PROJECT LINKS</h4>
               <a class="case-file-link" aria-label="Muaath GitHub profile, opens in a new tab" href="https://github.com/Warmmus" target="_blank" rel="noopener noreferrer">
                 &gt; GITHUB PROFILE ↗
               </a>
@@ -401,6 +500,7 @@
         </div>
 
         <!-- EXPERIMENT 002 // CASE FILE -->
+        <div class="project-outcome"><span>DELIVERED</span><p>Student CRUD with validation and consistent error responses.</p></div>
         <details class="experiment-case-file">
           <summary>
             &gt; VIEW CASE FILE
@@ -408,17 +508,12 @@
           <div class="case-file-content">
             <!-- OBJECTIVE -->
             <div class="case-file-section">
-              <h4>01 // OBJECTIVE</h4>
-              <p>
-                Develop a RESTful API for managing
-                student records, applying backend
-                architecture principles, data validation,
-                and structured error handling.
-              </p>
+              <h4>01 // THE PROBLEM</h4>
+              <p>Student records need consistent validation and predictable responses. Invalid input, duplicate emails, and missing records must be handled without scattering business rules across endpoints.</p>
             </div>
             <!-- IMPLEMENTED FEATURES -->
             <div class="case-file-section">
-              <h4>02 // IMPLEMENTED FEATURES</h4>
+              <h4>02 // MY CONTRIBUTION</h4>
               <ul class="case-file-list">
                 <li>
                   Implemented CRUD operations using
@@ -458,9 +553,13 @@
                 and centralized exception handling.
               </p>
             </div>
+            <div class="case-file-section case-file-result">
+              <h4>04 // THE RESULT</h4>
+              <p>The API supports creating, retrieving, updating, and deleting student records. Email uniqueness checks prevent duplicate records, while centralized exception handling returns meaningful HTTP status codes. Further improvements remain planned.</p>
+            </div>
             <!-- API OPERATIONS -->
             <div class="case-file-section">
-              <h4>04 // API OPERATIONS</h4>
+              <h4>05 // API OPERATIONS</h4>
               <ul class="case-file-list">
                 <li>GET — Retrieve student records</li>
                 <li>POST — Create a new student</li>
@@ -470,7 +569,7 @@
             </div>
             <!-- PROJECT STATUS -->
             <div class="case-file-section">
-              <h4>05 // PROJECT STATUS</h4>
+              <h4>06 // PROJECT STATUS</h4>
               <p>
                 Core CRUD functionality, validation,
                 and exception handling implemented.
@@ -479,7 +578,7 @@
             </div>
             <!-- PROJECT LINKS -->
             <div class="case-file-section">
-              <h4>06 // PROJECT LINKS</h4>
+              <h4>07 // PROJECT LINKS</h4>
               <a class="case-file-link" aria-label="Open Student API live application in a new tab" href="https://student-api.wormmus.com/" target="_blank" rel="noopener noreferrer">
                 &gt; LIVE APPLICATION ↗
               </a>
@@ -554,6 +653,7 @@
           <span>PYDANTIC</span>
         </div>
         <!-- PROJECT CASE FILE -->
+        <div class="project-outcome"><span>DELIVERED</span><p>A searchable creature catalogue with interactive API documentation.</p></div>
         <details class="experiment-case-file">
           <summary>
             &gt; VIEW CASE FILE
@@ -561,18 +661,12 @@
           <div class="case-file-content">
             <!-- OBJECTIVE -->
             <div class="case-file-section">
-              <h4>01 // OBJECTIVE</h4>
-              <p>
-                Develop a RESTful backend API
-                centered around creatures from
-                Arabian folklore while practicing
-                clean architecture, database design,
-                request validation, and error handling.
-              </p>
+              <h4>01 // THE PROBLEM</h4>
+              <p>A catalogue of Arabian folklore creatures needs searchable, persistent records and consistent validation. The challenge was to organize the API so routes, business rules, and data storage remain easy to follow.</p>
             </div>
             <!-- IMPLEMENTED FEATURES -->
             <div class="case-file-section">
-              <h4>02 // IMPLEMENTED FEATURES</h4>
+              <h4>02 // MY CONTRIBUTION</h4>
               <ul class="case-file-list">
                 <li>
                   Implemented full CRUD operations
@@ -616,9 +710,13 @@
                 validation and serialization.
               </p>
             </div>
+            <div class="case-file-section case-file-result">
+              <h4>04 // THE RESULT</h4>
+              <p>The API supports creature CRUD and name search with SQLite persistence. Pydantic schemas validate requests and responses, duplicate-name checks protect the catalogue, and Swagger UI exposes the endpoints for exploration.</p>
+            </div>
             <!-- API ENDPOINTS -->
             <div class="case-file-section">
-              <h4>04 // API OPERATIONS</h4>
+              <h4>05 // API OPERATIONS</h4>
               <ul class="case-file-list">
                 <li>GET /creatures</li>
                 <li>GET /creatures/&#123;id&#125;</li>
@@ -630,7 +728,7 @@
             </div>
             <!-- TECHNOLOGIES -->
             <div class="case-file-section">
-              <h4>05 // TECHNOLOGIES</h4>
+              <h4>06 // TECHNOLOGIES</h4>
               <p>
                 Python 3, FastAPI, SQLite,
                 Pydantic, and Uvicorn.
@@ -638,7 +736,7 @@
             </div>
             <!-- PROJECT LINKS -->
             <div class="case-file-section">
-              <h4>06 // PROJECT LINKS</h4>
+              <h4>07 // PROJECT LINKS</h4>
               <a class="case-file-link" aria-label="Mythos Arabia source code, opens in a new tab" href="https://github.com/Warmmus/mythos-arabia-api" target="_blank" rel="noopener noreferrer">
                 &gt; SOURCE CODE ↗
               </a>
@@ -877,6 +975,16 @@
         You have reached the end of the known system.
         One communication channel remains operational.
       </p>
+    </div>
+    <div class="direct-contact" aria-label="Direct contact options">
+      <p class="archive-label">DIRECT CHANNEL // ALWAYS OPEN</p>
+      <a class="direct-email" href="mailto:moazalshareef@gmail.com">moazalshareef&#64;gmail.com</a>
+      <div class="direct-contact-actions">
+        <button type="button" (click)="copyEmail()">Copy email</button>
+        <a href="https://www.linkedin.com/in/muaath-alshareef-08464a263/" target="_blank" rel="noopener noreferrer" aria-label="Muaath on LinkedIn, opens in a new tab">LinkedIn ↗</a>
+        <a href="https://github.com/Warmmus" target="_blank" rel="noopener noreferrer" aria-label="Muaath on GitHub, opens in a new tab">GitHub ↗</a>
+      </div>
+      <p class="copy-status" role="status" aria-live="polite">{{ copyStatus() }}</p>
     </div>
     <!-- COMMUNICATION TERMINAL -->
     <div class="transmission-terminal" role="group" aria-label="Communication terminal" tabindex="-1" [class.is-online]="transmissionStage() === 6">

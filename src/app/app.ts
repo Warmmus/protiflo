@@ -28,6 +28,25 @@ export class App implements AfterViewInit, OnDestroy {
   signal = 'STABLE';
   aboutCompromised = false;
   transmissionStage = signal(0);
+  readingMode = signal(false);
+  copyStatus = signal('');
+  readonly email = 'moazalshareef@gmail.com';
+
+  toggleReadingMode(): void {
+    this.readingMode.update(value => !value);
+    try { localStorage.setItem('portfolio-reading-mode', String(this.readingMode())); } catch { /* Storage is optional. */ }
+    this.stopHoverTracking();
+    this.scheduleScrollUpdate();
+  }
+
+  async copyEmail(): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(this.email);
+      this.copyStatus.set('Email copied.');
+    } catch {
+      this.copyStatus.set('Copy unavailable. Select the email address to copy it.');
+    }
+  }
 
   // Keyboard/touch visitors can pin recovered records rather than relying on light.
   pinnedFragments: boolean[] = [false, false, false];
@@ -72,10 +91,14 @@ export class App implements AfterViewInit, OnDestroy {
   private hoverFrame: number | null = null;
   private lastHoverCheck = 0;
   private bootTimers: number[] = [];
+  private careerObserver: IntersectionObserver | null = null;
 
   ngAfterViewInit(): void {
     // Avoid touching document/window while Angular renders on the server.
     if (!this.isBrowser) return;
+
+    try { this.readingMode.set(localStorage.getItem('portfolio-reading-mode') === 'true'); } catch { /* Use exploration mode if storage is unavailable. */ }
+    this.cdr.detectChanges();
 
     this.hero = document.querySelector<HTMLElement>('.hero');
     this.about = document.querySelector<HTMLElement>('.about');
@@ -98,6 +121,7 @@ export class App implements AfterViewInit, OnDestroy {
 
     // Visual-only input work stays outside Angular change detection.
     this.zone.runOutsideAngular(() => {
+      this.observeCareerRecords();
       window.addEventListener('scroll', this.scheduleScrollUpdate, { passive: true });
       window.addEventListener('resize', this.scheduleScrollUpdate, { passive: true });
       document.addEventListener('mousemove', this.onPointerMove, { passive: true });
@@ -107,6 +131,23 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   // Coalesce many scroll events into at most one update per animation frame.
+  private observeCareerRecords(): void {
+    if (!('IntersectionObserver' in window)) return;
+
+    // Records remain visible without JavaScript; the observer only adds polish.
+    this.careerObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add('record-recovered');
+        this.careerObserver?.unobserve(entry.target);
+      }
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.career-record').forEach(record => {
+      this.careerObserver?.observe(record);
+    });
+  }
+
   private scheduleScrollUpdate = (): void => {
     if (this.scrollFrame !== null) return;
 
@@ -119,7 +160,7 @@ export class App implements AfterViewInit, OnDestroy {
   private updateScrollState(): void {
     if (!this.hero || !this.lighting) return;
 
-    const active = this.hero.getBoundingClientRect().bottom <= 0;
+    const active = !this.readingMode() && this.hero.getBoundingClientRect().bottom <= 0;
     this.lighting.classList.toggle('active', active);
 
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
@@ -179,6 +220,7 @@ export class App implements AfterViewInit, OnDestroy {
 
   // Collect the latest pointer position; calculate only once per frame.
   private onPointerMove = (event: MouseEvent): void => {
+    if (this.readingMode()) return;
     this.pointerX = event.clientX;
     this.pointerY = event.clientY;
 
@@ -347,5 +389,6 @@ export class App implements AfterViewInit, OnDestroy {
     if (this.pointerFrame !== null) cancelAnimationFrame(this.pointerFrame);
     this.stopHoverTracking();
     this.bootTimers.forEach(timer => clearTimeout(timer));
+    this.careerObserver?.disconnect();
   }
 }
