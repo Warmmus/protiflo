@@ -1,0 +1,181 @@
+/* Persistent, theme-matched controls and direct contact. */
+.utility-dock {
+  position: fixed;
+  bottom: 16px;
+  right: 20px;
+  z-index: 2100;
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--yellow-dark);
+  background: #11110d;
+  box-shadow: 0 6px 24px #0008;
+  font:
+    0.72rem/1.5 'Courier New',
+    monospace;
+}
+.utility-dock a,
+.utility-dock button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  min-height: 44px;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+.utility-dock button {
+  border-left: 1px solid var(--border);
+}
+.utility-dock span {
+  color: var(--yellow);
+}
+.utility-dock :is(a, button):hover {
+  background: var(--surface-hover);
+}
+.utility-dock button[aria-pressed='true'] {
+  color: var(--yellow-bright);
+}
+.direct-contact {
+  max-width: 760px;
+  margin: 0 auto 36px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  background: #11110d;
+  text-align: left;
+}
+.direct-email {
+  display: inline-block;
+  margin: 12px 0;
+  padding: 0;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  user-select: text;
+  color: var(--text);
+  font-size: clamp(0.9rem, 2.5vw, 1.4rem);
+  overflow-wrap: anywhere;
+}
+.direct-email:hover {
+  color: var(--yellow);
+}
+.direct-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.direct-contact-actions :is(a, button) {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 14px;
+  min-height: 44px;
+  border: 1px solid var(--yellow-dark);
+  background: transparent;
+  color: var(--yellow);
+  font:
+    0.75rem/1.6 'Courier New',
+    monospace;
+  cursor: pointer;
+}
+.copy-status {
+  min-height: 1.7em;
+  margin: 14px 0 0;
+  color: var(--text);
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+.transmission {
+  padding-bottom: 110px;
+}
+
+/* Reading mode retains the palette and useful content, removing exploration effects. */
+.reading-mode {
+  --text-muted: #c1beaf;
+  --yellow-dark: #b6a04e;
+  background: var(--bg);
+}
+.reading-mode *,
+.reading-mode *::before,
+.reading-mode *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+.reading-mode
+  :is(
+    .cave-lighting,
+    .navbar-watcher,
+    .nav-monitor,
+    .eye-position,
+    .chamber-lights,
+    .fractured-passage,
+    .presence-corridor,
+    .descent-shaft,
+    .cave-wall,
+    .experiment-secret,
+    .experiment-pin-button,
+    .archive-warning,
+    .warning,
+    .transmission-terminal,
+    .transmission-ending
+  ) {
+  display: none !important;
+}
+.reading-mode :is(.about, .career, .projects, .instruments, .transmission) {
+  min-height: 0;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  background: var(--bg);
+}
+.reading-mode .hero {
+  min-height: 0;
+  padding-top: calc(var(--nav-height) + 70px);
+  padding-bottom: 70px;
+}
+.reading-mode .transmission {
+  padding-bottom: 120px;
+}
+.reading-mode .career-record {
+  opacity: 1;
+  transform: none;
+}
+.reading-mode .experiment-card {
+  background: var(--bg-secondary);
+  opacity: 1;
+  transform: none;
+}
+.reading-mode .experiment-card > p {
+  color: var(--text-muted);
+}
+.reading-mode .experiment-card::before,
+.reading-mode .experiment-card::after {
+  display: none;
+}
+.reading-mode .direct-contact {
+  margin-bottom: 0;
+}
+@media (max-width: 600px) {
+  .utility-dock {
+    right: 12px;
+    bottom: 12px;
+    max-width: calc(100% - 24px);
+  }
+  .utility-dock a,
+  .utility-dock button {
+    padding: 10px 12px;
+    font-size: 0.67rem;
+  }
+  .direct-contact {
+    padding: 20px;
+  }
+  .reading-mode :is(.about, .career, .projects, .instruments, .transmission) {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+}

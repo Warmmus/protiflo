@@ -26,6 +26,11 @@
       </span>
     </div>
     <!-- CENTER WATCHER -->
+    <div class="watcher-dock" aria-hidden="true">
+      <span class="watcher-dock-socket"></span>
+      <span class="watcher-dock-wire"></span>
+      <span class="watcher-dock-label">008 // DETACHED</span>
+    </div>
     <div class="navbar-watcher" aria-hidden="true">
       <!-- UAV-008 // FLIGHT HARDWARE -->
       <div class="uav-hardware">
@@ -215,7 +220,7 @@
         <h3 id="experience-title" class="career-section-title">01 // EXPERIENCE</h3>
         <ol class="career-timeline">
           <li class="career-record">
-            <div class="career-record-meta"><span>DEC 2025 — PRESENT</span><span class="career-status">CURRENT</span></div>
+            <div class="career-record-meta"><span>DEC 2025 — JUN 2026</span><span class="career-status">COMPLETED</span></div>
             <h4>Help Desk Specialist <span>(Tamheer)</span></h4>
             <p class="career-organization">IKEA Al Sulaiman</p>
             <ul class="career-details">
@@ -282,7 +287,7 @@
           <p>Experience, education, and technical skills in one complete dossier.</p>
           <a class="dossier-preview" href="Muaath-Alshareef-CV.pdf" target="_blank" rel="noopener noreferrer" aria-label="Preview Muaath Alshareef CV PDF, opens in a new tab">Preview CV <span aria-hidden="true">↗</span></a>
           <a class="primary-button" href="Muaath-Alshareef-CV.pdf" download="Muaath-Alshareef-CV.pdf">Download CV <span aria-hidden="true">↓</span></a>
-          <span class="career-file-type">PDF / 139 KB <span aria-hidden="true">·</span> PREVIEW OPENS IN A NEW TAB</span>
+          <span class="career-file-type">PDF / 137 KB <span aria-hidden="true">·</span> PREVIEW OPENS IN A NEW TAB</span>
         </aside>
       </section>
     </div>
@@ -976,11 +981,10 @@
         One communication channel remains operational.
       </p>
     </div>
-    <div class="direct-contact" aria-label="Direct contact options">
+    <div class="direct-contact" [hidden]="!readingMode()" aria-label="Direct contact options">
       <p class="archive-label">DIRECT CHANNEL // ALWAYS OPEN</p>
-      <a class="direct-email" href="mailto:moazalshareef@gmail.com">moazalshareef&#64;gmail.com</a>
+      <button class="direct-email" type="button" (click)="copyEmail()" aria-label="Copy email address: moazalshareef@gmail.com" title="Click to copy email">moazalshareef&#64;gmail.com</button>
       <div class="direct-contact-actions">
-        <button type="button" (click)="copyEmail()">Copy email</button>
         <a href="https://www.linkedin.com/in/muaath-alshareef-08464a263/" target="_blank" rel="noopener noreferrer" aria-label="Muaath on LinkedIn, opens in a new tab">LinkedIn ↗</a>
         <a href="https://github.com/Warmmus" target="_blank" rel="noopener noreferrer" aria-label="Muaath on GitHub, opens in a new tab">GitHub ↗</a>
       </div>

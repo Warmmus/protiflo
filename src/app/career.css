@@ -1,0 +1,410 @@
+/* PERSONNEL ARCHIVE // Career, education, and portable record */
+.career {
+  padding: 110px 10%;
+  border-top: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse at 85% 30%, rgba(230, 194, 41, 0.035), transparent 55%), #010101;
+  font-family: 'Courier New', monospace;
+}
+#career,
+#experience,
+#education {
+  scroll-margin-top: calc(var(--nav-height) + 24px);
+}
+.career-header {
+  margin-bottom: 52px;
+}
+.career-header h2 {
+  margin: 20px 0;
+  color: var(--text);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  letter-spacing: 0.04em;
+}
+.career-intro {
+  max-width: 620px;
+  color: #b8b5a5;
+  line-height: 1.8;
+}
+.career-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-top: 24px;
+}
+.career-index a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--yellow);
+  font-size: 0.8rem;
+}
+.career-index a:hover {
+  color: var(--yellow-bright);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+.career-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 48px;
+}
+.career-section-title {
+  margin: 0 0 26px;
+  color: var(--yellow);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+}
+.career-timeline {
+  list-style: none;
+  padding: 0 0 0 25px;
+  margin: 0 0 0 4px;
+  border-left: 1px solid var(--border);
+}
+.career-record {
+  position: relative;
+  padding: 0 0 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.career-record:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.career-record::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: -30px;
+  width: 7px;
+  height: 7px;
+  background: #010101;
+  border: 1px solid var(--yellow);
+}
+.career-record:first-child::before {
+  background: var(--yellow);
+  box-shadow: 0 0 12px rgba(230, 194, 41, 0.35);
+}
+.career-record-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  justify-content: space-between;
+  color: #b8b5a5;
+  font-size: 0.66rem;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+}
+.career-status {
+  color: var(--yellow);
+}
+.career h4 {
+  margin: 16px 0 10px;
+  color: var(--text);
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+.career h4 span {
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+.career-organization {
+  margin: 0;
+  color: var(--yellow);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+.career-details {
+  padding-left: 18px;
+  margin: 20px 0;
+  color: #c6c3b4;
+  font-size: 0.85rem;
+  line-height: 1.85;
+}
+.career-details li + li {
+  margin-top: 10px;
+}
+.career-details li::marker {
+  color: var(--yellow-dark);
+}
+.career-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.career-tags span {
+  padding: 6px 9px;
+  color: #c6bc89;
+  border: 1px solid var(--border);
+  font-size: 0.65rem;
+  line-height: 1.5;
+}
+.education-record {
+  padding: 26px;
+  border: 1px solid var(--border);
+  background: rgba(230, 194, 41, 0.025);
+}
+.education-record .career-record-meta {
+  margin-top: 0;
+}
+.education-mark {
+  display: block;
+  margin: 26px 0;
+  color: var(--yellow-dark);
+  font-size: 2.5rem;
+}
+.education-location {
+  color: #b8b5a5;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+.career-certifications {
+  margin-top: 36px;
+}
+.credential {
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+}
+.credential h4 {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+.career-download {
+  margin-top: 30px;
+  padding: 26px;
+  border: 1px dashed var(--yellow-dark);
+}
+.career-download .archive-label {
+  font-size: 0.68rem;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+}
+.career-download > p:not(.archive-label) {
+  color: #c6c3b4;
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+.career-download .primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 48px;
+  margin-top: 24px;
+  width: 100%;
+}
+.career-file-type {
+  display: block;
+  margin-top: 16px;
+  color: #b8b5a5;
+  line-height: 1.7;
+}
+.hero-actions {
+  flex-wrap: wrap;
+}
+/* Leave room for the depth display beside the expanded navigation. */
+@media (min-width: 851px) {
+  .nav-links {
+    gap: 1.25rem;
+  }
+}
+@media (min-width: 851px) and (max-width: 1150px) {
+  .nav-monitor-depth {
+    display: none;
+  }
+}
+@media (min-width: 601px) and (max-width: 850px) {
+  .nav-links {
+    gap: 0.75rem;
+  }
+}
+@media (max-width: 950px) {
+  .career-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+}
+@media (max-width: 600px) {
+  .career {
+    padding: 80px 6%;
+  }
+  .career-header {
+    margin-bottom: 36px;
+  }
+  .career-header h2 {
+    font-size: clamp(2rem, 8.6vw, 3rem);
+  }
+  .career-timeline {
+    padding-left: 20px;
+  }
+  .career-record::before {
+    left: -25px;
+  }
+  .career h4 {
+    font-size: 1.1rem;
+  }
+  .career-record-meta {
+    font-size: 0.62rem;
+  }
+  .education-record,
+  .career-download {
+    padding: 22px;
+  }
+}
+
+/* Archive refinements: clear introductions, evidence, and portable credentials. */
+.hero-intro {
+  max-width: 530px;
+  color: #c6c3b4;
+  font-size: 0.95rem;
+}
+.career-timeline {
+  position: relative;
+  border-left-color: rgba(230, 194, 41, 0.42);
+}
+.career-record.record-recovered::before {
+  background: var(--yellow);
+  box-shadow: 0 0 12px rgba(230, 194, 41, 0.3);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .career-record.record-recovered {
+    animation: recordRecovery 0.7s ease-out both;
+  }
+  .career-record::before {
+    transition:
+      background 0.5s ease,
+      box-shadow 0.5s ease;
+  }
+}
+@keyframes recordRecovery {
+  from {
+    opacity: 0.78;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.credential-link,
+.dossier-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  color: var(--yellow);
+  font-size: 0.74rem;
+  line-height: 1.6;
+}
+.credential-link {
+  margin-top: 12px;
+  width: fit-content;
+}
+.credential-link:hover,
+.dossier-preview:hover {
+  color: var(--yellow-bright);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.career-download {
+  position: relative;
+  border-style: solid;
+  border-color: var(--border);
+  background: linear-gradient(135deg, rgba(230, 194, 41, 0.055), transparent 65%);
+}
+.career-download::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 42px;
+  height: 3px;
+  background: var(--yellow);
+}
+.dossier-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: #b8b5a5;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  line-height: 1.7;
+}
+.dossier-format {
+  border: 1px solid var(--yellow-dark);
+  padding: 3px 7px;
+  color: var(--yellow);
+}
+.dossier-identity {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin: 26px 0 18px;
+}
+.dossier-icon {
+  width: 40px;
+  height: 50px;
+  flex-shrink: 0;
+  color: var(--yellow);
+}
+.dossier-identity h4 {
+  font-size: 1.05rem;
+  margin: 0 0 6px;
+}
+.dossier-identity p {
+  margin: 0;
+  color: #b8b5a5;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+.dossier-preview {
+  margin-top: 20px;
+  padding: 10px 14px;
+  border: 1px solid var(--yellow-dark);
+}
+.career-download .primary-button {
+  margin-top: 10px;
+}
+.career-file-type {
+  font-size: 0.58rem;
+}
+.project-outcome {
+  margin-top: 24px;
+  padding: 16px;
+  border-left: 2px solid var(--yellow-dark);
+  background: rgba(230, 194, 41, 0.035);
+}
+.project-outcome > span {
+  color: var(--yellow);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+.project-outcome > p {
+  margin: 8px 0 0;
+  color: #c6c3b4;
+  font-size: 0.8rem;
+  line-height: 1.75;
+}
+.case-file-result {
+  padding: 18px;
+  border: 1px solid var(--border);
+  background: rgba(230, 194, 41, 0.025);
+}
+.case-file-section p,
+.case-file-list li {
+  color: #b8b5a5;
+}
+@media (max-width: 600px) {
+  .hero-intro {
+    max-width: 300px;
+    font-size: 0.85rem;
+    margin-top: 24px;
+  }
+  .dossier-identity {
+    gap: 14px;
+  }
+}

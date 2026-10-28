@@ -16,7 +16,8 @@ import { EyeComponent } from './components/eye/eye';
   selector: 'app-root',
   imports: [EyeComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  // Preserve cascade order: core layout, career records, display modes, Watcher effects.
+  styleUrls: ['./app.css', './career.css', './display-modes.css', './watcher.css']
 })
 export class App implements AfterViewInit, OnDestroy {
   private readonly zone = inject(NgZone);
@@ -161,6 +162,12 @@ export class App implements AfterViewInit, OnDestroy {
     if (!this.hero || !this.lighting) return;
 
     const active = !this.readingMode() && this.hero.getBoundingClientRect().bottom <= 0;
+    const wasActive = this.lighting.classList.contains('active');
+    if (active !== wasActive) {
+      document.querySelector('.navbar-watcher')?.classList.toggle(
+        'is-docking', !active && !this.readingMode()
+      );
+    }
     this.lighting.classList.toggle('active', active);
 
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
@@ -168,7 +175,7 @@ export class App implements AfterViewInit, OnDestroy {
       ? Math.max(0, Math.min(1, window.scrollY / maxScroll))
       : 0;
 
-    document.documentElement.style.setProperty('--cave-darkness', String(0.08 + progress * 0.52));
+    document.documentElement.style.setProperty('--cave-darkness', String(0.08 + progress * 0.14));
     document.documentElement.style.setProperty('--beam-opacity', String(0.28 + progress * 0.22));
 
     const depth = Math.round(progress * 120);
@@ -261,7 +268,8 @@ export class App implements AfterViewInit, OnDestroy {
   private updateExperimentReveals(): void {
     if (
       !this.lighting?.classList.contains('active') ||
-      !this.beam || !this.beamStart || !this.beamEnd
+      !this.beam || !this.beamStart || !this.beamEnd ||
+      Number(getComputedStyle(this.beam).opacity) < 0.1
     ) {
       for (const target of this.illuminatedTargets) {
         if (target.classList.contains('is-illuminated')) {
