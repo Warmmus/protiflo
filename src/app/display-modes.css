@@ -179,3 +179,23 @@
     padding-right: 6%;
   }
 }
+/* Actual project captures replace the illustrations only in reading mode. */
+.reading-mode :is(.visual-protiflo, .visual-student-api) {
+  height: auto;
+  aspect-ratio: 1.95;
+  background: #080806;
+}
+.project-screenshot {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.project-screenshot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.portfolio .project-screenshot:focus-visible {
+  outline-offset: -4px;
+}

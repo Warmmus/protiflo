@@ -348,9 +348,14 @@
         <!-- RECOVERED VISUAL RECORD 001 -->
         <div class="visual-record-header">
           <span class="visual-record-id">VISUAL_RECORD_001</span>
-          <span class="visual-record-status">SURVEILLANCE_CAPTURE</span>
+          <span class="visual-record-status">{{ readingMode() ? 'APPLICATION_SCREENSHOT' : 'SURVEILLANCE_CAPTURE' }}</span>
         </div>
-        <div class="experiment-visual visual-protiflo" aria-hidden="true">
+        <div class="experiment-visual visual-protiflo" [attr.aria-hidden]="readingMode() ? null : 'true'">
+          @if (readingMode()) {
+            <a class="project-screenshot" href="projects/protiflo.png" target="_blank" rel="noopener noreferrer" aria-label="View full-size Protiflo screenshot, opens in a new tab">
+              <img src="projects/protiflo.png" alt="Protiflo portfolio homepage with Muaath’s introduction and links to projects, GitHub, and CV." width="1188" height="642" loading="lazy" decoding="async" />
+            </a>
+          } @else {
           <svg class="archive-art" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" focusable="false">
             <defs>
               <linearGradient id="archive-protiflo-beam" x1="0" y1="0" x2="0" y2="1">
@@ -370,6 +375,7 @@
             <circle cx="130" cy="63" r="2.5" fill="#e35a50" />
           </svg>
           <span class="visual-scan"></span>
+          }
         </div>
         <h3 id="project-title-001">PROTIFLO</h3>
         <p>
@@ -470,9 +476,14 @@
         <!-- RECOVERED VISUAL RECORD 002 -->
         <div class="visual-record-header">
           <span class="visual-record-id">VISUAL_RECORD_002</span>
-          <span class="visual-record-status">NETWORK_TOPOLOGY</span>
+          <span class="visual-record-status">{{ readingMode() ? 'APPLICATION_SCREENSHOT' : 'NETWORK_TOPOLOGY' }}</span>
         </div>
-        <div class="experiment-visual visual-student-api" aria-hidden="true">
+        <div class="experiment-visual visual-student-api" [attr.aria-hidden]="readingMode() ? null : 'true'">
+          @if (readingMode()) {
+            <a class="project-screenshot" href="projects/student-api.png" target="_blank" rel="noopener noreferrer" aria-label="View full-size Student API screenshot, opens in a new tab">
+              <img src="projects/student-api.png" alt="Student management application showing the add-student form, search and sorting controls, and student list." width="1900" height="921" loading="lazy" decoding="async" />
+            </a>
+          } @else {
           <svg class="archive-art" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" focusable="false">
             <defs>
               <radialGradient id="archive-api-halo">
@@ -491,6 +502,7 @@
             <circle cx="130" cy="65" r="7" fill="#e6c229" />
           </svg>
           <span class="visual-scan"></span>
+          }
         </div>
         <h3 id="project-title-002">STUDENT API</h3>
         <p>
